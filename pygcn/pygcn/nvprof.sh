@@ -1,0 +1,5 @@
+COMMAND="python train.py --dataset reddit --epochs 10"
+rm train-reddit-timeline.nvprof
+rm train-reddit-metrics.nvprof
+/usr/local/cuda/bin/nvprof --profile-from-start off --export-profile train-reddit-timeline.nvprof $COMMAND
+/usr/local/cuda/bin/nvprof --profile-from-start off --metrics issued_ipc,issue_slot_utilization,achieved_occupancy,eligible_warps_per_cycle,gld_efficiency,gst_efficiency,shared_efficiency,warp_execution_efficiency,gld_throughput,gst_throughput,dram_utilization,cf_fu_utilization,double_precision_fu_utilization,half_precision_fu_utilization,issue_slot_utilization,l2_utilization,ldst_fu_utilization,shared_utilization,single_precision_fu_utilization,special_fu_utilization,sysmem_read_utilization,sysmem_utilization,sysmem_write_utilization,tex_fu_utilization,tex_utilization,stall_constant_memory_dependency,stall_exec_dependency,stall_inst_fetch,stall_memory_dependency,stall_memory_throttle,stall_not_selected,stall_other,stall_pipe_busy,stall_sync -o train-reddit-metrics.nvprof $COMMAND
