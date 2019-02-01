@@ -89,6 +89,9 @@ def sparse_mx_to_torch_sparse_tensor(sparse_mx):
     return torch.sparse.FloatTensor(indices, values, shape)
 
 def process_reddit():
+    ##################################################
+    ########### FROM GraphSage CODE ##################
+    ##################################################
     import networkx as nx
     from networkx.readwrite import json_graph
     version_info = list(map(int, nx.__version__.split('.')))
@@ -152,7 +155,9 @@ def process_reddit():
         scaler.fit(train_feats)
         feats = scaler.transform(feats)
 
-    # return G, feats, id_map, walks, class_map
+    ##################################################
+    ########### END GraphSage CODE ##################
+    ##################################################
 
     print("Prepare for GCN")
     N = len(feats) # number of nodes
