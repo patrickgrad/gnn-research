@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: multiscalegnn
+Version: 0.1
+Summary: Multi scale graph neural networks in PyTorch
+Home-page: https://afansi.github.io
+Author: Arsene Fansi
+Author-email: arsene.fansi@gmail.com
+License: MIT
+Download-URL: https://github.com/afansi/multiscalegnn
+Description: UNKNOWN
+Platform: UNKNOWN

@@ -1,0 +1,14 @@
+README.md
+setup.py
+multiscalegnn/__init__.py
+multiscalegnn/snap.py
+multiscalegnn.egg-info/PKG-INFO
+multiscalegnn.egg-info/SOURCES.txt
+multiscalegnn.egg-info/dependency_links.txt
+multiscalegnn.egg-info/requires.txt
+multiscalegnn.egg-info/top_level.txt
+multiscalegnn/models/__init__.py
+multiscalegnn/models/models.py
+multiscalegnn/models/permute4.py
+multiscalegnn/models/snapload.py
+multiscalegnn/models/utils.py
