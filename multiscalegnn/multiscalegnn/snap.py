@@ -4,14 +4,18 @@ from __future__ import print_function
 import time
 import argparse
 import numpy as np
+import re
 
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.autograd import Variable
 from models import *
+import cudaprofile as cp
+from itertools import product
 
 import os
+import sys
 
 # Training settings
 parser = argparse.ArgumentParser()
@@ -42,6 +46,10 @@ parser.add_argument('--J', type=int, default=3,
                     help='scale of the extrapolation')
 parser.add_argument('--verbose', type=int, default=0)
 parser.add_argument('--prefix', type=str, default='')
+parser.add_argument('--prof-forward', action='store_true', help='profile the forward pass')
+parser.add_argument('--prof-backprop', action='store_true', help='profile the backprop pass')
+parser.add_argument('--profile-batch-list', help='range of epochs to profile to start profiling')
+parser.add_argument('--profile-epoch-list', help='range of epochs to profile to start profiling')
 
 opt = parser.parse_args()
 opt.cuda = not opt.no_cuda and torch.cuda.is_available()
@@ -51,6 +59,38 @@ opt.datagraphpath = opt.datagraphpathroot + 'com-' + opt.graph + '.ungraph.txt'
 opt.datacommpath = opt.datagraphpathroot + \
     'com-' + opt.graph + '.top5000.cmty.txt'
 
+def expand_range_string(string):
+    expanded_list = [] 
+    if string is None: 
+        return expanded_list
+
+    elements = string.split(',');
+    range_re = re.compile("(?P<begin>\d+)-(?P<end>\d+)")
+    num_re = re.compile("(?P<num>\d+)")
+    for e in elements:
+        match = range_re.match(e)
+        if match:
+            if match.group('end') < match.group('begin'):
+                print("list range must have begin < end '{}'".format(e));
+                sys.exit(1)
+            try:
+                expanded_list.extend(range(int(match.group('begin')), int(match.group('end'))))
+            except ValueError:
+                print("list range must use integers '{}'".format(e));
+                sys.exit(1)
+
+            continue
+        match = num_re.match(e)
+        if match:
+            try:
+                expanded_list.append(int(match.group('num')))
+            except ValueError:
+                print("list must use integers '{}'".format(e));
+                sys.exit(1)
+            continue
+        print("Unexpected list argument {}".format(e));
+        sys.exit(1)
+    return expanded_list
 
 def file_exists(name):
     return os.path.isfile(name)
@@ -73,6 +113,10 @@ def accuracyFromConfusion(confusion):
         s = s + confusion[i, i]
 
     return s / confusion.sum()
+
+opt.profile_epoch_list = expand_range_string(opt.profile_epoch_list)
+opt.profile_batch_list = expand_range_string(opt.profile_batch_list)
+to_profile = list(product(opt.profile_epoch_list, opt.profile_batch_list))
 
 
 featuremap_in = [1, 1, opt.nfeatures]
@@ -289,6 +333,7 @@ if opt.cuda:
 def train(epoch=1):
     global confusion
     global running_avg
+    profiler_started = False
 
     t = time.time()
     tb = t
@@ -305,7 +350,21 @@ def train(epoch=1):
         Wtmp, inp, target = loadexample(shuffle[l], opt.J, False)
 
         optimizer.zero_grad()
+        if opt.prof_forward:
+            if opt.cuda and ( (epoch,l) in to_profile):
+                print("Starting Profiler!: Forward")
+                cp.start()
+                profiler_started = True
         pred = model(inp, Wtmp)
+        if opt.prof_forward:
+            if profiler_started:
+                print("Stopping Profiler!: Forward")
+                cp.stop()
+                profiler_started = False
+                to_profile.remove((epoch,l))
+                if len(to_profile) == 0:
+                    print("All profiling complete and --stop-after-profiling was given! Exiting");
+                    sys.exit(0);
         predt = pred.clone()
         laball = Variable(torch.LongTensor(inp.size(2), perms).zero_())
         losses = Variable(torch.Tensor(perms))
@@ -340,13 +399,27 @@ def train(epoch=1):
             )
             tb = tb1
 
+        if opt.prof_backprop:
+            if opt.cuda and ( (epoch,l) in to_profile):
+                print("Starting Profiler!: Backprop")
+                cp.start()
+                profiler_started = True
         loss.backward()
+        if opt.prof_backprop:
+            if profiler_started:
+                print("Stopping Profiler!: Backprop")
+                cp.stop()
+                profiler_started = False
+                to_profile.remove((epoch,l))
+                if len(to_profile) == 0:
+                    print("All profiling complete and --stop-after-profiling was given! Exiting");
+                    sys.exit(0);
         optimizer.step()
 
     print('confusion: ', confusion)
     trainAccuracy = accuracyFromConfusion(confusion) * 100
 
-    print('Epoch[{}] Train loss {}'.format(epoch, totloss[0] / numiters),
+    print('Epoch[{}] Train loss {}'.format(epoch, totloss / numiters),
           'acc_train: {:.4f}'.format(trainAccuracy),
           'time: {:.4f}s'.format(time.time() - t))
 
@@ -390,8 +463,8 @@ def test(epoch=1):
             losses[s] = loss
         lmin, lpos = torch.min(losses, 0)
         confusion = updateConfusionMatrix(
-            confusion, pred, laball[:, lpos[0].data].squeeze(1))
-        totloss = totloss + lmin[0]
+            confusion, pred, laball[:, lpos.item()])
+        totloss = totloss + lmin.item()
         if l % 50 == 0:
             print('##### Epoch {}: Iter {}/{} ####'.format(epoch, l, numiters))
             print('confusion: ', confusion)
@@ -404,7 +477,7 @@ def test(epoch=1):
     print(confusion)
     testAccuracy = accuracyFromConfusion(confusion) * 100
 
-    print('Epoch[{}] Test loss {}'.format(epoch, totloss[0] / numiters),
+    print('Epoch[{}] Test loss {}'.format(epoch, totloss / numiters),
           'acc_test: {:.4f}'.format(testAccuracy),
           'time: {:.4f}s'.format(time.time() - t))
 
