@@ -323,10 +323,13 @@ def train(epoch=1):
         lmin, lpos = torch.min(losses, 0)
         running_avg = prho * running_avg + (1 - prho) * lmin[0]
 
-        loss = F.cross_entropy(pred, laball[:, lpos[0].data].squeeze(1))
-        totloss = totloss + lmin[0]
+        # Adam: Made some tweaks here to fix runtime errors. 
+        # I do not quite understand the initial implementation, but I believe 
+        # my changes achieve the desired effect.
+        loss = F.cross_entropy(pred, laball[:, lpos.item()])
+        totloss = totloss + lmin.item()
         confusion = updateConfusionMatrix(
-            confusion, pred.clone(), laball[:, lpos[0].data].squeeze(1))
+            confusion, pred.clone(), laball[:, lpos.item()])
         if l % 50 == 0:
             print('##### Epoch {}: Iter {}/{} ####'.format(epoch, l, numiters))
             print('running_avg: ', running_avg)
