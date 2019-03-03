@@ -110,6 +110,8 @@ parser.add_argument('--logPath', default='./log/qm9/mpnn/', help='log path')
 parser.add_argument('--consoleLogPath', default='./console_log/qm9/mpnn', help='console log path')
 parser.add_argument('--plotLr', default=False, help='allow plotting the data')
 parser.add_argument('--plotPath', default='./plot/qm9/mpnn/', help='plot path')
+parser.add_argument('--prof-forward', help='profile the forward pass', action='store_true')
+parser.add_argument('--prof-backprop', help='profile the backprop pass', action='store_true')
 parser.add_argument('--noprofile', help='do not call nvprof profile start/stop', action='store_true')
 parser.add_argument('--stop-after-profiling', help='stop after all profiling has completed', action='store_true')
 parser.add_argument('--profile-epoch-list', help='range of epochs to profile to start profiling (only used if --noprofile is not given')
@@ -333,10 +335,6 @@ def train(train_loader, model, criterion, optimizer, epoch, evaluation, logger):
     profiler_started = False
     end = time.time()
     for i, (g, h, e, target) in enumerate(train_loader):
-        if args.cuda and (not args.noprofile) and batch_counter.start_batch(epoch, i):
-            console_logger.info("Starting Profiler!")
-            cp.start()
-            profiler_started = True
 
         # Prepare input data
         if args.cuda:
@@ -348,8 +346,23 @@ def train(train_loader, model, criterion, optimizer, epoch, evaluation, logger):
 
         optimizer.zero_grad()
 
-        # Compute output
+        if args.prof_forward:
+            if args.cuda and (not args.noprofile) and batch_counter.start_batch(epoch, i):
+                console_logger.info("Starting Profiler!: Forward")
+                cp.start()
+                profiler_started = True
+            # Compute output
         output = model(g, h, e)
+        if args.prof_forward:
+            if profiler_started:
+                console_logger.info("Stopping Profiler!: Forward")
+                cp.stop()
+                profiler_started = False
+                done = batch_counter.stop_batch(epoch, i)
+                if done and args.stop_after_profiling:
+                    console_logger.info("All profiling complete and --stop-after-profiling was given! Exiting");
+                    sys.exit(0);
+
         train_loss = criterion(output, target)
 
         # Logs
@@ -357,21 +370,27 @@ def train(train_loader, model, criterion, optimizer, epoch, evaluation, logger):
         error_ratio.update(evaluation(output, target).item(), g.size(0))
 
         # compute gradient and do SGD step
+        if args.prof_backprop:
+            if args.cuda and (not args.noprofile) and batch_counter.start_batch(epoch, i):
+                console_logger.info("Starting Profiler!: Backprop")
+                cp.start()
+                profiler_started = True
         train_loss.backward()
         optimizer.step()
+        if args.prof_backprop:
+            if profiler_started:
+                console_logger.info("Stopping Profiler: Backprop!")
+                cp.stop()
+                profiler_started = False
+                done = batch_counter.stop_batch(epoch, i)
+                if done and args.stop_after_profiling:
+                    console_logger.info("All profiling complete and --stop-after-profiling was given! Exiting");
+                    sys.exit(0);
 
         # Measure elapsed time
         batch_time.update(time.time() - end)
         end = time.time()
 
-        if profiler_started:
-            console_logger.info("Stopping Profiler!")
-            cp.stop()
-            profiler_started = False
-            done = batch_counter.stop_batch(epoch, i)
-            if done and args.stop_after_profiling:
-                console_logger.info("All profiling complete and --stop-after-profiling was given! Exiting");
-                sys.exit(0);
 
         if i % args.log_interval == 0 and i > 0:
 
