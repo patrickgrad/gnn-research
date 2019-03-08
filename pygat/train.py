@@ -2,6 +2,8 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import sys
+import re
 import glob
 import time
 import random
@@ -15,6 +17,8 @@ from torch.autograd import Variable
 
 from utils import load_data, accuracy
 from models import GAT, SpGAT
+import cudaprofile as cp
+from itertools import product
 
 # Training settings
 parser = argparse.ArgumentParser()
@@ -30,9 +34,50 @@ parser.add_argument('--nb_heads', type=int, default=8, help='Number of head atte
 parser.add_argument('--dropout', type=float, default=0.6, help='Dropout rate (1 - keep probability).')
 parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
 parser.add_argument('--patience', type=int, default=100, help='Patience')
+parser.add_argument('--prof-forward', action='store_true', help='profile the forward pass')
+parser.add_argument('--prof-backprop', action='store_true', help='profile the backprop pass')
+parser.add_argument('--profile-batch-list', help='range of epochs to profile to start profiling')
+parser.add_argument('--profile-epoch-list', help='range of epochs to profile to start profiling')
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
+
+def expand_range_string(string):
+    expanded_list = [] 
+    if string is None: 
+        return expanded_list
+
+    elements = string.split(',');
+    range_re = re.compile("(?P<begin>\d+)-(?P<end>\d+)")
+    num_re = re.compile("(?P<num>\d+)")
+    for e in elements:
+        match = range_re.match(e)
+        if match:
+            if match.group('end') < match.group('begin'):
+                print("list range must have begin < end '{}'".format(e));
+                sys.exit(1)
+            try:
+                expanded_list.extend(range(int(match.group('begin')), int(match.group('end'))))
+            except ValueError:
+                print("list range must use integers '{}'".format(e));
+                sys.exit(1)
+
+            continue
+        match = num_re.match(e)
+        if match:
+            try:
+                expanded_list.append(int(match.group('num')))
+            except ValueError:
+                print("list must use integers '{}'".format(e));
+                sys.exit(1)
+            continue
+        print("Unexpected list argument {}".format(e));
+        sys.exit(1)
+    return expanded_list
+
+args.profile_epoch_list = expand_range_string(args.profile_epoch_list)
+args.profile_batch_list = expand_range_string(args.profile_batch_list)
+to_profile = list(product(args.profile_epoch_list, args.profile_batch_list))
 
 random.seed(args.seed)
 np.random.seed(args.seed)
@@ -75,13 +120,42 @@ features, adj, labels = Variable(features), Variable(adj), Variable(labels)
 
 
 def train(epoch):
+    profiler_started = False
     t = time.time()
     model.train()
     optimizer.zero_grad()
+    if args.prof_forward:
+        if args.cuda and ( (epoch,0) in to_profile):
+            print("Starting Profiler!: Forward")
+            cp.start()
+            profiler_started = True
     output = model(features, adj)
+    if args.prof_forward:
+        if profiler_started:
+            print("Stopping Profiler!: Forward")
+            cp.stop()
+            profiler_started = False
+            to_profile.remove((epoch, 0))
+            if len(to_profile) == 0:
+                print("All profiling complete and --stop-after-profiling was given! Exiting");
+                sys.exit(0);
     loss_train = F.nll_loss(output[idx_train], labels[idx_train])
     acc_train = accuracy(output[idx_train], labels[idx_train])
+    if args.prof_backprop:
+        if args.cuda and ( (epoch,0) in to_profile):
+            print("Starting Profiler!: Backprop")
+            cp.start()
+            profiler_started = True
     loss_train.backward()
+    if args.prof_backprop:
+        if profiler_started:
+            print("Stopping Profiler!: Backprop")
+            cp.stop()
+            profiler_started = False
+            to_profile.remove((epoch,0))
+            if len(to_profile) == 0:
+                print("All profiling complete and --stop-after-profiling was given! Exiting");
+                sys.exit(0);
     optimizer.step()
 
     if not args.fastmode:
