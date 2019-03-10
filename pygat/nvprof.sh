@@ -4,15 +4,11 @@ NVPROF="nvprof"
 NVPROF_FLAGS=" -s --profile-child-processes  --profile-from-start off "
 #NVPROF_FLAGS=" --profile-child-processes  --profile-from-start off --print-api-trace "
 
-DATASET="qm9"
-DATASETPATH="./data/qm9/dsgdb9nsd/"
-MODEL=${MODEL:-"MPNNv2"} # MPNNv1 uses too much memory, and MPNNv3 crashed
 PHASE=${PHASE:-"forward"}
-EPOCHS="1" 
-PROFILE_EPOCHS="0"
-PROFILE_BATCHES="100"
-BATCH_SIZE=10
-PF_THREADS=10
+MODEL=${MODEL:-"dense"}
+EPOCHS="200" 
+PROFILE_EPOCHS="100-110"
+PROFILE_BATCHES="0"
 
 PROF_ROOT="./profile"
 LOG_ROOT="./log"
@@ -28,26 +24,18 @@ PROF_DIR="$PROF_ROOT/$DATE/"
 #METRICS="dram_read_transactions,dram_write_transactions"
 METRICS="flop_count_dp,flop_count_sp,flop_count_hp,inst_fp_64,inst_fp_32,inst_fp_16,inst_integer,gld_requested_throughput,gst_requested_throughput,shared_load_throughput,shared_store_throughput,gld_efficiency,gld_requested_throughput,gld_throughput,gst_efficiency,gst_requested_throughput,gst_throughput,shared_efficiency,global_hit_rate,global_load_requests,local_hit_rate,local_load_requests,local_store_requests,l2_tex_hit_rate,l2_tex_read_transactions,l2_tex_write_transactions,shared_load_transactions,shared_store_transactions,tex_cache_hit_rate,tex_cache_transactions,dram_read_transactions,dram_write_transactions"
 
-# Need to add l2_read_transactions and l2_write_transactions
 NVPROF_METRICS_FLAGS="  --log-file $PROF_DIR/metrics-nvprof.%p.log --export-profile $PROF_DIR/train-metrics.%p.nvprof  --metrics $METRICS "
 NVPROF_TIMELINE_FLAGS=" --log-file $PROF_DIR/timeline-nvprof.%p.log  --export-profile $PROF_DIR/train-timeline.%p.nvprof"
 
-COMMAND="python main.py "
+COMMAND="python train.py "
 MAIN_FLAGS=" \
-  --dataset $DATASET \
-    --datasetPath $DATASETPATH \
     --epochs $EPOCHS \
-    --model $MODEL \
-    --log-interval 20 \
     --profile-epoch-list $PROFILE_EPOCHS \
     --profile-batch-list $PROFILE_BATCHES \
-    --batch-size $BATCH_SIZE \
-    --prefetch $PF_THREADS \
-    --stop-after-profiling \
   "
 
-MAIN_METRICS_FLAGS="  --logPath $LOG_DIR/metrics  --consoleLogPath $PROF_DIR/main-metrics.out"
-MAIN_TIMELINE_FLAGS=" --logPath $LOG_DIR/timeline --consoleLogPath $PROF_DIR/main-timeline.out"
+MAIN_METRICS_FLAGS=""
+MAIN_TIMELINE_FLAGS=""
 
 
 # Check args
@@ -63,6 +51,9 @@ if [ $MODE != 'both' ] && [ $MODE != 'timeline' ] && [ $MODE != 'metrics' ] ; th
   exit 1
 fi
 
+if [ $MODEL == 'sparse' ] ; then
+  MAIN_FLAGS=" $MAIN_FLAGS --sparse "
+fi
 # Add flags for profiling phase
 if [ $PHASE == 'forward' ] ; then
   MAIN_FLAGS=" $MAIN_FLAGS --prof-forward "
@@ -104,8 +95,8 @@ fi
 
 # link latest dirs
 (
-  rm latest
   cd $PROF_ROOT
+  rm latest
   ln -f -s $DATE -T latest
 )
 
