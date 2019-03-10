@@ -1,0 +1,35 @@
+==19333== NVPROF is profiling process 19333, command: python train.py --epochs 200 --profile-epoch-list 100-110 --profile-batch-list 0 --prof-forward
+==19333== Profiling application: python train.py --epochs 200 --profile-epoch-list 100-110 --profile-batch-list 0 --prof-forward
+==19333== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   31.50%  519.58ms       100  5.1958ms  12.320us  9.4144ms  void CatArrayBatchedCopy<float, unsigned int, int=2>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                   29.26%  482.64ms        90  5.3627ms  5.3079ms  6.1297ms  void gemv2T_kernel_val<float, float, float, int=128, int=16, int=2, int=4, bool=0>(int, int, float, float const *, int, float const *, int, float, float*, int)
+                   12.79%  211.04ms        90  2.3449ms  2.0436ms  2.7341ms  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=-1>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+                    6.20%  102.27ms        90  1.1364ms  932.74us  1.3936ms  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=2>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+                    3.36%  55.477ms       110  504.33us  15.968us  1.3380ms  generate_bernoulli(curandStateMtgp32*, int, float*, double)
+                    2.68%  44.271ms        90  491.90us  488.29us  497.38us  void at::native::_GLOBAL__N__54_tmpxft_0000343e_00000000_10_SoftMax_compute_70_cpp1_ii_826a4626::cunn_SoftMaxForward<int=2, float, float, at::native::_GLOBAL__N__54_tmpxft_0000343e_00000000_10_SoftMax_compute_70_cpp1_ii_826a4626::SoftMaxForwardEpilogue>(float*, float, int)
+                    2.49%  41.052ms       110  373.20us  6.5920us  462.34us  void kernelPointwiseApply2<TensorMulOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    1.82%  30.015ms        90  333.50us  327.78us  365.12us  _ZN2at4cuda21kernelPointwiseApply4IZN84_GLOBAL__N__60_tmpxft_00003553_00000000_10_TensorCompare_compute_70_cpp1_ii_865d2fc810where_cudaIfEEvRNS_6TensorERKS4_S7_S7_EUlRfRKhRKfSC_E_fhffjLi1ELi1ELi1ELi1EEEvNS0_6detail10TensorInfoIT0_T4_EENSF_IT1_SH_EENSF_IT2_SH_EENSF_IT3_SH_EESH_T_
+                    1.74%  28.661ms       110  260.56us     448ns  1.0101ms  [CUDA memcpy DtoD]
+                    1.72%  28.362ms       110  257.84us  2.9120us  326.98us  void kernelPointwiseApply1<TensorDivConstantOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorDivConstantOp<float>, float, unsigned int>, float, float)
+                    1.64%  27.094ms        90  301.04us  287.20us  532.71us  void kernelPointwiseApply2<LeakyReLUUpdateOutput<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<LeakyReLUUpdateOutput<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    1.62%  26.800ms        90  297.78us  291.78us  329.60us  void kernelPointwiseApply2<TensorMulConstantOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMulConstantOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    1.02%  16.746ms        90  186.06us  183.20us  195.84us  void kernelPointwiseApply2<TensorGTValueOp<float, unsigned char>, unsigned char, float, unsigned int, int=1, int=1>(OffsetInfo<unsigned char, unsigned char, float>, OffsetInfo<TensorGTValueOp<float, unsigned char>, unsigned char, unsigned int>, unsigned char, float)
+                    0.83%  13.613ms        80  170.16us  166.56us  179.68us  sgemm_32x32x32_NN_vec
+                    0.77%  12.779ms        90  141.99us  133.03us  177.60us  void kernelPointwiseApply1<TensorFillOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorFillOp<float>, float, unsigned int>, float, float)
+                    0.54%  8.8682ms       100  88.681us  10.112us  173.76us  sgemm_32x32x32_NN
+                    0.01%  167.08us        90  1.8560us  1.6640us  2.0490us  void kernelPointwiseApply2<ELUupdateOutput_functor<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<ELUupdateOutput_functor<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.01%  146.82us        10  14.681us  14.560us  14.785us  void at::native::_GLOBAL__N__54_tmpxft_0000343e_00000000_10_SoftMax_compute_70_cpp1_ii_826a4626::cunn_SoftMaxForward<int=2, float, float, at::native::_GLOBAL__N__54_tmpxft_0000343e_00000000_10_SoftMax_compute_70_cpp1_ii_826a4626::LogSoftMaxForwardEpilogue>(float*, float, int)
+                    0.01%  98.497us       100     984ns     864ns  1.5680us  [CUDA memcpy HtoD]
+      API calls:   99.71%  7.25621s      1520  4.7738ms  5.8150us  876.00ms  cudaLaunch
+                    0.17%  12.082ms     17710     682ns     601ns  181.54us  cudaGetDevice
+                    0.06%  4.2610ms      6510     654ns     555ns  8.8800us  cudaSetDevice
+                    0.04%  2.7558ms       210  13.122us  7.6880us  37.228us  cudaMemcpyAsync
+                    0.01%  793.68us      8220      96ns      70ns     527ns  cudaSetupArgument
+                    0.00%  362.82us       289  1.2550us     748ns  3.1540us  cudaEventQuery
+                    0.00%  260.63us       109  2.3910us     665ns  155.53us  cudaEventDestroy
+                    0.00%  259.94us      1520     171ns     119ns     833ns  cudaConfigureCall
+                    0.00%  216.12us      1540     140ns      79ns     406ns  cudaGetLastError
+                    0.00%  162.11us       100  1.6210us  1.3180us  11.530us  cudaEventCreateWithFlags
+                    0.00%  155.69us       100  1.5560us  1.4120us  2.3010us  cudaEventRecord
+==19333== Generated result file: /home/adam/school/research/gnn/gnn-research/pygat/profile/2019_03_03__14_48_01/train-timeline.19333.nvprof

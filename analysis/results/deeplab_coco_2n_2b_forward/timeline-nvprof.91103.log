@@ -1,0 +1,48 @@
+==91103== NVPROF is profiling process 91103, command: python train.py --backbone xception --lr 0.01 --workers 2 --epochs 1 --batch-size 2 --gpu-ids 0 --checkname deeplab-xception --eval-interval 1 --dataset cityscapes --profile-epoch-list 0 --profile-batch-list 2 --prof-forward
+==91103== Profiling application: python train.py --backbone xception --lr 0.01 --workers 2 --epochs 1 --batch-size 2 --gpu-ids 0 --checkname deeplab-xception --eval-interval 1 --dataset cityscapes --profile-epoch-list 0 --profile-batch-list 2 --prof-forward
+==91103== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   24.32%  20.178ms        70  288.25us  95.843us  1.2709ms  maxwell_scudnn_128x128_relu_interior_nn
+                   19.50%  16.182ms        63  256.86us  122.31us  3.0941ms  void spatialDepthwiseConvolutionUpdateOutput<float, float, unsigned int, int=3>(THCDeviceTensor<float, int=4, int, DefaultPtrTraits>, THCDeviceTensor<float, int=4, int, DefaultPtrTraits>, THCDeviceTensor<float, int=4, int, DefaultPtrTraits>, THCDeviceTensor<float, int=1, int, DefaultPtrTraits>, bool, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)
+                   14.68%  12.182ms         3  4.0608ms  4.0505ms  4.0712ms  void cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=0>(int, int, int, float const *, int, float*, cudnn::detail::implicit_convolve_sgemm<float, float, int=128, int=6, int=7, int=3, int=3, int=5, int=1, bool=1, bool=0, bool=0>*, kernel_conv_params, int, float, float, int, float, float, int, int)
+                   10.81%  8.9662ms        63  142.32us  95.394us  743.64us  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=-1, int=1>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+                    7.26%  6.0248ms       118  51.057us  10.273us  129.25us  void cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>, cudnnTensorStruct*, float const *, float const , float, float, float*, float const *, float const *, float const *, float, float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnFwPersistentState*, int, float, float, float, int, float, float, cudnnStatus_t*, bool)
+                    5.48%  4.5493ms         2  2.2747ms  2.1032ms  2.4461ms  maxwell_scudnn_winograd_128x128_ldg1_ldg4_tile148n_nt
+                    3.97%  3.2917ms        16  205.73us  51.202us  413.00us  void cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=20>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=20>, cudnnTensorStruct*, float const *, float const , float, float, float*, float const *, float const *, float const *, float, float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnFwPersistentState*, int, float, float, float, int, float, float, cudnnStatus_t*, bool)
+                    3.95%  3.2797ms        65  50.457us  29.120us  309.16us  void kernelPointwiseApply1<ThresholdUpdateOutputIP<float>, float, unsigned int, int=1>(OffsetInfo<ThresholdUpdateOutputIP<float>, float, unsigned int>, float, float)
+                    1.88%  1.5619ms        63  24.792us  14.816us  145.44us  void kernelPointwiseApply1<TensorFillOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorFillOp<float>, float, unsigned int>, float, float)
+                    1.21%  1.0013ms        20  50.063us  44.289us  118.50us  void kernelPointwiseApply3<TensorAddOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorAddOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+                    1.20%  997.95us         3  332.65us  35.425us  481.81us  generate_bernoulli(curandStateMtgp32*, int, float*, double)
+                    0.77%  639.54us         7  91.362us  52.161us  142.05us  void cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=10>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=10>, cudnnTensorStruct*, float const *, float const , float, float, float*, float const *, float const *, float const *, float, float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnFwPersistentState*, int, float, float, float, int, float, float, cudnnStatus_t*, bool)
+                    0.63%  522.99us         1  522.99us  522.99us  522.99us  void adaptiveaveragepool<float>(float*, float*, int, int, int, int, long, long, long)
+                    0.61%  510.13us         3  170.04us  123.62us  209.29us  void caffe_gpu_interp2_kernel<float, float>(int, float, float, bool, THCDeviceTensor<float, int=4, int, DefaultPtrTraits>, THCDeviceTensor<float, int=4, int, DefaultPtrTraits>)
+                    0.60%  501.33us         1  501.33us  501.33us  501.33us  maxwell_scudnn_128x64_relu_small_nn
+                    0.58%  483.34us         3  161.11us  14.304us  234.60us  void kernelPointwiseApply2<TensorMulOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.48%  394.32us         9  43.812us  3.3280us  156.52us  void kernelPointwiseApply2<ThresholdUpdateOutput<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<ThresholdUpdateOutput<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.41%  342.63us         4  85.658us     608ns  164.10us  [CUDA memcpy DtoD]
+                    0.39%  320.65us         3  106.88us  6.6890us  157.03us  void kernelPointwiseApply1<TensorDivConstantOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorDivConstantOp<float>, float, unsigned int>, float, float)
+                    0.32%  268.23us         2  134.12us  58.786us  209.45us  void CatArrayBatchedCopy<float, unsigned int, int=4>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                    0.31%  260.87us       141  1.8500us  1.0240us  4.5440us  void kernelPointwiseApply1<TensorAddConstantOp<long>, long, unsigned int, int=1>(OffsetInfo<TensorAddConstantOp<long>, long, unsigned int>, long, long)
+                    0.17%  144.77us        74  1.9560us  1.1840us  3.8080us  cudnn::maxwell::gemm::computeOffsetsKernel(cudnn::maxwell::gemm::ComputeOffsetsParams)
+                    0.13%  111.72us         1  111.72us  111.72us  111.72us  maxwell_scudnn_128x32_relu_interior_nn
+                    0.12%  96.515us         1  96.515us  96.515us  96.515us  maxwell_scudnn_128x64_relu_interior_nn
+                    0.10%  80.963us         1  80.963us  80.963us  80.963us  maxwell_scudnn_128x32_relu_small_nn
+                    0.05%  42.978us         2  21.489us  20.065us  22.913us  void cudnn::winograd::generateWinogradTilesKernel<int=0, float, float>(cudnn::winograd::GenerateWinogradTilesParams<float, float>)
+                    0.03%  22.528us        19  1.1850us     608ns  3.3280us  [CUDA memset]
+                    0.01%  11.520us         1  11.520us  11.520us  11.520us  void add_tensor_kernel_v3<int=2, float, float, int=128, int=1, int=1, int=4, int=2>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, float, float)
+                    0.00%  3.1360us         2  1.5680us  1.3760us  1.7600us  [CUDA memcpy HtoD]
+      API calls:   99.29%  1.33170s       736  1.8094ms  5.8090us  1.32089s  cudaLaunch
+                    0.32%  4.2552ms      7993     532ns     280ns  17.038us  cudaGetDevice
+                    0.14%  1.9035ms      6538     291ns     153ns  7.9110us  cudaSetupArgument
+                    0.12%  1.6686ms      2422     688ns     339ns  8.7630us  cudaSetDevice
+                    0.04%  549.40us       254  2.1620us     872ns  16.368us  cudaEventRecord
+                    0.03%  375.75us       897     418ns     149ns  7.1160us  cudaGetLastError
+                    0.02%  330.80us       736     449ns     186ns  5.7310us  cudaConfigureCall
+                    0.01%  188.50us        19  9.9210us  7.2290us  19.208us  cudaMemsetAsync
+                    0.01%  160.05us         6  26.674us  11.727us  62.503us  cudaMemcpyAsync
+                    0.00%  39.094us        32  1.2210us     843ns  3.2800us  cudaStreamWaitEvent
+                    0.00%  19.235us         3  6.4110us  3.8080us  9.7330us  cudaBindTexture
+                    0.00%  5.0650us         3  1.6880us     986ns  2.1930us  cudaUnbindTexture
+                    0.00%  4.3160us         2  2.1580us     927ns  3.3890us  cudaEventQuery
+                    0.00%  3.8280us         2  1.9140us  1.5490us  2.2790us  cudaEventCreateWithFlags
+==91103== Generated result file: /scratch/auten2/gnn/pytorch-deeplab-xception/profile/2019_03_05__15_19_22/train-timeline.91103.nvprof
