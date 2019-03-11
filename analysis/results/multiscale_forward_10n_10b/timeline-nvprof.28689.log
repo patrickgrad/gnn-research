@@ -1,0 +1,31 @@
+==28689== NVPROF is profiling process 28689, command: python snap.py --data_dir ../data/ --graph dblp --maxepoch 2 --profile-epoch-list 1 --profile-batch-list 100-110 --prof-forward
+==28689== Profiling application: python snap.py --data_dir ../data/ --graph dblp --maxepoch 2 --profile-epoch-list 1 --profile-batch-list 100-110 --prof-forward
+==28689== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   71.08%  38.766ms       650  59.640us     896ns  474.21us  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+                   14.37%  7.8397ms       420  18.666us  2.0160us  112.32us  sgemm_32x32x32_NN
+                    5.91%  3.2238ms       250  12.895us  3.7760us  16.353us  maxwell_scudnn_128x32_relu_interior_nn
+                    2.66%  1.4530ms       180  8.0720us  1.7600us  22.592us  sgemm_32x32x32_NN_vec
+                    1.09%  591.88us       130  4.5520us  2.7520us  10.592us  void CatArrayBatchedCopy<float, unsigned int, int=3>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                    0.90%  490.98us       250  1.9630us  1.3760us  3.3920us  void add_tensor_kernel_v3<int=2, float, float, int=128, int=1, int=1, int=4, int=2>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, float, float)
+                    0.89%  484.65us       120  4.0380us  2.9440us  7.2000us  void cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>(cudnnTensorStruct, float const *, cudnn::detail::bn_fw_tr_1C11_singleread<float, int=512, bool=1, int=1, int=2, int=0>, cudnnTensorStruct*, float const *, float const , float, float, float*, float const *, float const *, float const *, float, float, cudnn::reduced_divisor, int, float*, cudnn::detail::bnFwPersistentState*, int, float, float, float, int, float, float, cudnnStatus_t*, bool)
+                    0.78%  426.82us        15  28.454us  1.5680us  84.480us  void gemv2N_kernel_val<float, float, float, int=128, int=4, int=4, int=4, int=1>(float, float, cublasGemv2Params_v2<float, float, float>)
+                    0.58%  317.00us       120  2.6410us  1.9520us  4.7680us  void CatArrayBatchedCopy<float, unsigned int, int=4>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                    0.57%  310.37us       250  1.2410us     960ns  1.9200us  cudnn::maxwell::gemm::computeOffsetsKernel(cudnn::maxwell::gemm::ComputeOffsetsParams)
+                    0.30%  160.96us       250     643ns     512ns  1.3760us  [CUDA memcpy HtoD]
+                    0.27%  144.67us       120  1.2050us  1.0560us  1.6010us  void kernelPointwiseApply1<TensorAddConstantOp<long>, long, unsigned int, int=1>(OffsetInfo<TensorAddConstantOp<long>, long, unsigned int>, long, long)
+                    0.25%  139.04us        10  13.904us  12.160us  16.576us  void gemv2N_kernel_val<float, float, float, int=128, int=8, int=4, int=4, int=1>(float, float, cublasGemv2Params_v2<float, float, float>)
+                    0.24%  131.39us       120  1.0940us     960ns  1.4080us  void kernelPointwiseApply2<TensorMaxValueOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMaxValueOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.11%  61.409us        25  2.4560us  1.6960us  4.9280us  void gemv2N_kernel_val<float, float, float, int=128, int=32, int=4, int=4, int=1>(float, float, cublasGemv2Params_v2<float, float, float>)
+      API calls:   99.56%  7.04638s      2660  2.6490ms  4.6060us  713.06ms  cudaLaunch
+                    0.26%  18.278ms     27890     655ns     529ns  289.90us  cudaGetDevice
+                    0.08%  5.7989ms      9250     626ns     545ns  8.7110us  cudaSetDevice
+                    0.03%  1.8568ms       250  7.4270us  6.5830us  13.542us  cudaMemcpyAsync
+                    0.02%  1.7009ms     17880      95ns      70ns     900ns  cudaSetupArgument
+                    0.01%  1.0190ms       620  1.6430us  1.2690us  10.750us  cudaEventRecord
+                    0.01%  653.36us       328  1.9910us     761ns  3.5130us  cudaEventQuery
+                    0.01%  476.76us      3540     134ns      69ns  1.3390us  cudaGetLastError
+                    0.01%  417.25us      2660     156ns      97ns     499ns  cudaConfigureCall
+                    0.01%  355.86us       250  1.4230us  1.3140us  2.2260us  cudaEventCreateWithFlags
+                    0.00%  336.39us       280  1.2010us     666ns  2.0400us  cudaEventDestroy
+==28689== Generated result file: /home/adam/school/research/gnn/gnn-research/multiscalegnn/multiscalegnn/profile/2019_03_09__14_21_07/train-timeline.28689.nvprof

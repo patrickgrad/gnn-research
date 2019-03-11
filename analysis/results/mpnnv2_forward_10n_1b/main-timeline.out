@@ -1,0 +1,17 @@
+03-10 12:50 INFO     TESTING
+03-10 12:50 INFO     Prepare files
+03-10 12:50 INFO     Define model
+03-10 12:50 INFO     	Statistics
+03-10 12:50 INFO     	Create model
+03-10 12:50 INFO     Check cuda
+03-10 12:50 INFO     	* Cuda
+03-10 12:50 INFO     Optimizer
+03-10 12:50 INFO     Logger
+03-10 12:50 INFO     => no best model found at './checkpoint/qm9/mpnn/model_best.pth'
+03-10 12:50 INFO     Epoch: [0][20/11389]	Time 0.142 (0.175)	Data 0.000 (0.019)	Loss 0.8950 (1.0628)	Error Ratio 1.0819 (1.1264)
+03-10 12:50 INFO     Epoch: [0][40/11389]	Time 0.137 (0.161)	Data 0.000 (0.010)	Loss 0.8349 (1.0613)	Error Ratio 0.9977 (1.3278)
+03-10 12:50 INFO     Epoch: [0][60/11389]	Time 0.137 (0.156)	Data 0.000 (0.007)	Loss 0.6028 (1.0141)	Error Ratio 1.0124 (1.2739)
+03-10 12:50 INFO     Epoch: [0][80/11389]	Time 0.144 (0.154)	Data 0.000 (0.005)	Loss 2.6831 (1.0005)	Error Ratio 1.0835 (1.5779)
+03-10 12:50 INFO     Starting Profiler!: Forward
+03-10 12:50 INFO     Stopping Profiler!: Forward
+03-10 12:51 INFO     All profiling complete and --stop-after-profiling was given! Exiting

@@ -1,0 +1,969 @@
+==11259== NVPROF is profiling process 11259, command: python main.py --dataset qm9 --datasetPath ./data/qm9/dsgdb9nsd/ --epochs 1 --model MPNNv1 --log-interval 20 --profile-epoch-list 0 --profile-batch-list 100 --batch-size 10 --prefetch 10 --stop-after-profiling --prof-backprop --logPath ./log/2019_03_08__1
+==11259== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+==11259== Profiling application: python main.py --dataset qm9 --datasetPath ./data/qm9/dsgdb9nsd/ --epochs 1 --model MPNNv1 --log-interval 20 --profile-epoch-list 0 --profile-batch-list 100 --batch-size 10 --prefetch 10 --stop-after-profiling --prof-backprop --logPath ./log/2019_03_08__1
+==11259== Profiling result:
+==11259== Metric result:
+Invocations                               Metric Name                                         Metric Description         Min         Max         Avg
+Device "GeForce GTX 1070 Ti (0)"
+    Kernel: sgemm_32x32x32_TN_vec
+         66                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         66                             flop_count_sp                Floating Point Operations(Single Precision)      333312   411611136    39136256
+         66                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         66                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         66                                inst_fp_32                                    FP Instructions(Single)      198144   206057472    19753239
+         66                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         66                              inst_integer                                       Integer Instructions       68608    14893056     1707349
+         66                  gld_requested_throughput                           Requested Global Load Throughput  2.2482GB/s  620.36GB/s  426.17GB/s
+         66                  gst_requested_throughput                          Requested Global Store Throughput  803.64MB/s  36.461GB/s  8.3039GB/s
+         66                    shared_load_throughput                              Shared Memory Load Throughput  34.793GB/s  1265.3GB/s  968.08GB/s
+         66                   shared_store_throughput                             Shared Memory Store Throughput  21.975GB/s  636.05GB/s  504.07GB/s
+         66                            gld_efficiency                              Global Memory Load Efficiency      99.64%     100.00%      99.89%
+         66                            gld_throughput                                     Global Load Throughput  2.2563GB/s  620.36GB/s  426.18GB/s
+         66                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+         66                            gst_throughput                                    Global Store Throughput  803.64MB/s  36.461GB/s  8.3039GB/s
+         66                         shared_efficiency                                   Shared Memory Efficiency      66.85%      75.82%      74.71%
+         66                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       3.25%       1.02%
+         66                      global_load_requests   Total number of global load requests from Multiprocessor         156      400000       37419
+         66                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         66                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         66                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         66                           l2_tex_hit_rate                                          L2 Cache Hit Rate      15.32%      81.04%      41.71%
+         66                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)         552     1600000      148258
+         66                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         192        4096        2912
+         66                  shared_load_transactions                                   Shared Load Transactions        2128      815872       84899
+         66                 shared_store_transactions                                  Shared Store Transactions        1344      410112       44206
+         66                        tex_cache_hit_rate                                     Unified Cache Hit Rate       0.25%      29.47%      23.74%
+         66                    tex_cache_transactions                                 Unified Cache Transactions         624     1600000      149677
+         66                    dram_read_transactions                            Device Memory Read Transactions         614      306716       29141
+         66                   dram_write_transactions                           Device Memory Write Transactions          12       26701        2920
+    Kernel: void kernelPointwiseApply3<ThresholdUpdateGradInput<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<ThresholdUpdateGradInput<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         69                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         69                             flop_count_sp                Floating Point Operations(Single Precision)           0           0           0
+         69                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         69                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         69                                inst_fp_32                                    FP Instructions(Single)        3200     1600000      142840
+         69                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         69                              inst_integer                                       Integer Instructions       70804    35514032     3168206
+         69                  gld_requested_throughput                           Requested Global Load Throughput  6.8369GB/s  91.489GB/s  71.108GB/s
+         69                  gst_requested_throughput                          Requested Global Store Throughput  5.3218GB/s  63.398GB/s  52.215GB/s
+         69                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         69                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         69                            gld_efficiency                              Global Memory Load Efficiency      64.30%      75.28%      70.09%
+         69                            gld_throughput                                     Global Load Throughput  10.311GB/s  125.30GB/s  103.18GB/s
+         69                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+         69                            gst_throughput                                    Global Store Throughput  5.3218GB/s  63.398GB/s  52.215GB/s
+         69                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         69                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         69                      global_load_requests   Total number of global load requests from Multiprocessor         753      391958       34741
+         69                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         69                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         69                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         69                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+         69                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)         774      398422       35281
+         69                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         400      200000       17855
+         69                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         69                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         69                        tex_cache_hit_rate                                     Unified Cache Hit Rate      44.09%      49.45%      47.46%
+         69                    tex_cache_transactions                                 Unified Cache Transactions         753      391958       34741
+         69                    dram_read_transactions                            Device Memory Read Transactions         781      406243       36137
+         69                   dram_write_transactions                           Device Memory Write Transactions          16      196576       17015
+    Kernel: maxwell_sgemm_128x64_nn
+          8                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          8                             flop_count_sp                Floating Point Operations(Single Precision)    14778368  8243200000  2719141888
+          8                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          8                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          8                                inst_fp_32                                    FP Instructions(Single)     7406080  4148000000  1385977280
+          8                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          8                              inst_integer                                       Integer Instructions      481152   640400000   354580432
+          8                  gld_requested_throughput                           Requested Global Load Throughput  5.7253GB/s  96.483GB/s  50.232GB/s
+          8                  gst_requested_throughput                          Requested Global Store Throughput  1.3021GB/s  139.78GB/s  70.344GB/s
+          8                    shared_load_throughput                              Shared Memory Load Throughput  158.67GB/s  1682.6GB/s  1358.6GB/s
+          8                   shared_store_throughput                             Shared Memory Store Throughput  39.078GB/s  946.82GB/s  750.20GB/s
+          8                            gld_efficiency                              Global Memory Load Efficiency      55.59%      77.12%      63.86%
+          8                            gld_throughput                                     Global Load Throughput  10.300GB/s  125.11GB/s  66.658GB/s
+          8                            gst_efficiency                             Global Memory Store Efficiency      77.66%      77.70%      77.67%
+          8                            gst_throughput                                    Global Store Throughput  1.6766GB/s  180.00GB/s  90.580GB/s
+          8                         shared_efficiency                                   Shared Memory Efficiency      48.41%      55.48%      51.42%
+          8                           global_hit_rate                          Global Hit Rate in unified l1/tex      19.09%      32.15%      25.95%
+          8                      global_load_requests   Total number of global load requests from Multiprocessor       18135     4681250     1310706
+          8                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          8                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          8                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          8                           l2_tex_hit_rate                                          L2 Cache Hit Rate       5.56%      58.47%      40.86%
+          8                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)       18322     4427941     1201358
+          8                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)        2936     5360936     2029811
+          8                  shared_load_transactions                                   Shared Load Transactions       30208    18400000     7611328
+          8                 shared_store_transactions                                  Shared Store Transactions        7440     7050000     4202790
+          8                        tex_cache_hit_rate                                     Unified Cache Hit Rate      47.95%      58.60%      54.22%
+          8                    tex_cache_transactions                                 Unified Cache Transactions       18135     4681250     1310706
+          8                    dram_read_transactions                            Device Memory Read Transactions       11947     4359067     1164152
+          8                   dram_write_transactions                           Device Memory Write Transactions        3467     4161236     1582620
+    Kernel: sgemm_32x32x32_NN_vec
+         63                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         63                             flop_count_sp                Floating Point Operations(Single Precision)      333312   424990720    21742770
+         63                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         63                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         63                                inst_fp_32                                    FP Instructions(Single)      198144   218667008    11205258
+         63                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         63                              inst_integer                                       Integer Instructions       68096    24485888     1284486
+         63                  gld_requested_throughput                           Requested Global Load Throughput  1.3554GB/s  599.73GB/s  300.47GB/s
+         63                  gst_requested_throughput                          Requested Global Store Throughput  1.5852GB/s  37.418GB/s  19.533GB/s
+         63                    shared_load_throughput                              Shared Memory Load Throughput  34.114GB/s  1652.2GB/s  849.98GB/s
+         63                   shared_store_throughput                             Shared Memory Store Throughput  21.305GB/s  919.96GB/s  474.92GB/s
+         63                            gld_efficiency                              Global Memory Load Efficiency      99.42%     100.00%      99.82%
+         63                            gld_throughput                                     Global Load Throughput  1.3633GB/s  599.73GB/s  300.47GB/s
+         63                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+         63                            gst_throughput                                    Global Store Throughput  1.5852GB/s  37.418GB/s  19.533GB/s
+         63                         shared_efficiency                                   Shared Memory Efficiency      70.34%      74.39%      72.26%
+         63                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       1.33%       0.06%
+         63                      global_load_requests   Total number of global load requests from Multiprocessor         100      400704       20291
+         63                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         63                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         63                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         63                           l2_tex_hit_rate                                          L2 Cache Hit Rate      15.32%      81.85%      29.64%
+         63                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)         344     1583700       80049
+         63                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         400      100000        5269
+         63                  shared_load_transactions                                   Shared Load Transactions        2152     1103920       57329
+         63                 shared_store_transactions                                  Shared Store Transactions        1344      614656       32032
+         63                        tex_cache_hit_rate                                     Unified Cache Hit Rate       4.94%      34.97%      15.85%
+         63                    tex_cache_transactions                                 Unified Cache Transactions         400     1602816       81165
+         63                    dram_read_transactions                            Device Memory Read Transactions         408      209802       13737
+         63                   dram_write_transactions                           Device Memory Write Transactions          23      104516        5276
+    Kernel: void sgemm_largek_lds64<bool=0, bool=1, int=5, int=5, int=4, int=4, int=4, int=32>(float*, float const *, float const *, int, int, int, int, int, int, float const *, float const *, float, float, int, int, int*, int*)
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)    51335168    51335168    51335168
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)    25696256    25696256    25696256
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions     4929162     4930063     4929553
+          3                  gld_requested_throughput                           Requested Global Load Throughput  72.502GB/s  73.372GB/s  72.877GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  359.43MB/s  363.81MB/s  361.31MB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  1497.0GB/s  1515.2GB/s  1504.8GB/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  124.77GB/s  126.29GB/s  125.42GB/s
+          3                            gld_efficiency                              Global Memory Load Efficiency      82.34%      82.42%      82.39%
+          3                            gld_throughput                                     Global Load Throughput  87.971GB/s  89.105GB/s  88.454GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency      24.85%      24.85%      24.85%
+          3                            gst_throughput                                    Global Store Throughput  1.4128GB/s  1.4300GB/s  1.4201GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency      42.29%      42.29%      42.29%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       8.16%       8.79%       8.42%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor      203282      203491      203367
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      18.98%      20.64%      20.03%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)      128833      130527      129648
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)        2268        2268        2268
+          3                  shared_load_transactions                                   Shared Load Transactions      600800      600800      600800
+          3                 shared_store_transactions                                  Shared Store Transactions       50076       50076       50076
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      58.38%      58.95%      58.73%
+          3                    tex_cache_transactions                                 Unified Cache Transactions      203397      203424      203415
+          3                    dram_read_transactions                            Device Memory Read Transactions      104225      107553      106415
+          3                   dram_write_transactions                           Device Memory Write Transactions       26679       28343       27238
+    Kernel: void kernelPointwiseApply2<Tensor_sqrt_Float_Op, float, float, unsigned int, int=1, int=1>(OffsetInfo<float, unsigned int, int=1>, OffsetInfo<float, unsigned int, int=1>, unsigned int, Tensor_sqrt_Float_Op)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)          84     4289845      207961
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)          72     3677010      178252
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2264    15077277      751478
+         28                  gld_requested_throughput                           Requested Global Load Throughput  20.399MB/s  89.759GB/s  40.763GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  20.399MB/s  89.759GB/s  40.763GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         28                            gld_throughput                                     Global Load Throughput  27.199MB/s  89.759GB/s  40.764GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         28                            gst_throughput                                    Global Store Throughput  27.199MB/s  89.759GB/s  40.764GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           2       85264        4240
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           2       85264        4240
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           2       85264        4240
+         28                    dram_read_transactions                            Device Memory Read Transactions          23       87402        4588
+         28                   dram_write_transactions                           Device Memory Write Transactions          12       79437        3304
+    Kernel: void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=2>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+         10                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         10                             flop_count_sp                Floating Point Operations(Single Precision)           0           0           0
+         10                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         10                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         10                                inst_fp_32                                    FP Instructions(Single)           0           0           0
+         10                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         10                              inst_integer                                       Integer Instructions       61117       61117       61117
+         10                  gld_requested_throughput                           Requested Global Load Throughput  3.4546GB/s  3.7939GB/s  3.6915GB/s
+         10                  gst_requested_throughput                          Requested Global Store Throughput  3.4546GB/s  3.7939GB/s  3.6915GB/s
+         10                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                            gld_efficiency                              Global Memory Load Efficiency      76.04%      76.04%      76.04%
+         10                            gld_throughput                                     Global Load Throughput  4.5430GB/s  4.9892GB/s  4.8546GB/s
+         10                            gst_efficiency                             Global Memory Store Efficiency      79.76%      99.62%      83.73%
+         10                            gst_throughput                                    Global Store Throughput  3.6930GB/s  4.7564GB/s  4.4436GB/s
+         10                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         10                           global_hit_rate                          Global Hit Rate in unified l1/tex       7.67%       8.67%       8.17%
+         10                      global_load_requests   Total number of global load requests from Multiprocessor         229         229         229
+         10                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         10                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         10                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         10                           l2_tex_hit_rate                                          L2 Cache Hit Rate       5.36%      34.94%      28.27%
+         10                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)         274         277         275
+         10                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         229         286         274
+         10                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         10                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         10                        tex_cache_hit_rate                                     Unified Cache Hit Rate      45.28%      50.92%      50.24%
+         10                    tex_cache_transactions                                 Unified Cache Transactions         229         229         229
+         10                    dram_read_transactions                            Device Memory Read Transactions         293         505         430
+         10                   dram_write_transactions                           Device Memory Write Transactions          23         291         229
+    Kernel: void kernelPointwiseApply3<TensorAddCDivOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorAddCDivOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)         204    10556749      513471
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)         132     7226124      356276
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2312    18429218      925062
+         28                  gld_requested_throughput                           Requested Global Load Throughput  65.023MB/s  136.96GB/s  80.040GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  21.674MB/s  45.653GB/s  26.680GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      97.27%
+         28                            gld_throughput                                     Global Load Throughput  86.698MB/s  136.96GB/s  80.158GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      96.02%
+         28                            gst_throughput                                    Global Store Throughput  28.899MB/s  45.653GB/s  26.796GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           6      255792       12720
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate      25.00%      33.32%      25.83%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           6      255792       12738
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4258
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.78%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           6      255792       12720
+         28                    dram_read_transactions                            Device Memory Read Transactions          13      258528       12997
+         28                   dram_write_transactions                           Device Memory Write Transactions          12       87365        3892
+    Kernel: maxwell_sgemm_128x64_nt
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)    16875520    16875520    16875520
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)     8454656     8454656     8454656
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions      454144      454144      454144
+          3                  gld_requested_throughput                           Requested Global Load Throughput  22.728GB/s  23.009GB/s  22.898GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  2.5279GB/s  2.5591GB/s  2.5468GB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  173.57GB/s  175.72GB/s  174.87GB/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  41.531GB/s  42.045GB/s  41.842GB/s
+          3                            gld_efficiency                              Global Memory Load Efficiency      78.53%      78.53%      78.53%
+          3                            gld_throughput                                     Global Load Throughput  28.942GB/s  29.300GB/s  29.159GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency      77.64%      77.64%      77.64%
+          3                            gst_throughput                                    Global Store Throughput  3.2560GB/s  3.2963GB/s  3.2804GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency      48.29%      48.29%      48.29%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex      12.67%      12.95%      12.81%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor       19190       19190       19190
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      49.50%      49.64%      49.57%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)       19918       19950       19928
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)        2574        2574        2574
+          3                  shared_load_transactions                                   Shared Load Transactions       34304       34304       34304
+          3                 shared_store_transactions                                  Shared Store Transactions        8208        8208        8208
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      54.36%      54.43%      54.38%
+          3                    tex_cache_transactions                                 Unified Cache Transactions       19190       19190       19190
+          3                    dram_read_transactions                            Device Memory Read Transactions       12769       13929       13335
+          3                   dram_write_transactions                           Device Memory Write Transactions        3280        3373        3338
+    Kernel: sgemm_128x128x8_NN_vec
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)   415933952   415933952   415933952
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)   208807424   208807424   208807424
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions    13820672    13820672    13820672
+          3                  gld_requested_throughput                           Requested Global Load Throughput  162.55GB/s  163.43GB/s  163.10GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  81.130GB/s  81.570GB/s  81.407GB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  1424.8GB/s  1432.5GB/s  1429.7GB/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  254.42GB/s  255.80GB/s  255.29GB/s
+          3                            gld_efficiency                              Global Memory Load Efficiency     100.00%     100.00%     100.00%
+          3                            gld_throughput                                     Global Load Throughput  162.55GB/s  163.43GB/s  163.10GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+          3                            gst_throughput                                    Global Store Throughput  81.130GB/s  81.570GB/s  81.407GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency      48.95%      48.95%      48.95%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.04%       0.63%       0.32%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor      100192      100192      100192
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      47.47%      47.83%      47.62%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)      398192      400560      399440
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)      200000      200000      200000
+          3                  shared_load_transactions                                   Shared Load Transactions      878096      878096      878096
+          3                 shared_store_transactions                                  Shared Store Transactions      156800      156800      156800
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      25.10%      25.15%      25.13%
+          3                    tex_cache_transactions                                 Unified Cache Transactions      400768      400768      400768
+          3                    dram_read_transactions                            Device Memory Read Transactions      112816      118836      115826
+          3                   dram_write_transactions                           Device Memory Write Transactions      193921      195094      194346
+    Kernel: void kernelPointwiseApply3<TensorMulOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         23                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         23                             flop_count_sp                Floating Point Operations(Single Precision)         300       18250        2641
+         23                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         23                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         23                                inst_fp_32                                    FP Instructions(Single)         300       18250        2641
+         23                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         23                              inst_integer                                       Integer Instructions        8648      475228       69506
+         23                  gld_requested_throughput                           Requested Global Load Throughput  1.1839GB/s  51.098GB/s  10.164GB/s
+         23                  gst_requested_throughput                          Requested Global Store Throughput  606.15MB/s  25.549GB/s  5.0821GB/s
+         23                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         23                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         23                            gld_efficiency                              Global Memory Load Efficiency      98.68%      99.97%      98.85%
+         23                            gld_throughput                                     Global Load Throughput  1.1997GB/s  51.115GB/s  10.181GB/s
+         23                            gst_efficiency                             Global Memory Store Efficiency      98.68%      99.97%      98.85%
+         23                            gst_throughput                                    Global Store Throughput  614.23MB/s  25.558GB/s  5.0903GB/s
+         23                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         23                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         23                      global_load_requests   Total number of global load requests from Multiprocessor          76        4564         661
+         23                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         23                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         23                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         23                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+         23                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)          76        4564         661
+         23                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)          38        2282         330
+         23                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         23                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         23                        tex_cache_hit_rate                                     Unified Cache Hit Rate      49.33%      49.99%      49.42%
+         23                    tex_cache_transactions                                 Unified Cache Transactions          76        4564         661
+         23                    dram_read_transactions                            Device Memory Read Transactions          83        4603         827
+         23                   dram_write_transactions                           Device Memory Write Transactions          12         751          75
+    Kernel: void kernelPointwiseApply3<TensorAddOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorAddOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+        189                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+        189                             flop_count_sp                Floating Point Operations(Single Precision)          12      682112       18123
+        189                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+        189                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+        189                                inst_fp_32                                    FP Instructions(Single)          12      682112       18123
+        189                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+        189                              inst_integer                                       Integer Instructions        2312    17736448      472142
+        189                  gld_requested_throughput                           Requested Global Load Throughput  47.585MB/s  124.79GB/s  49.203GB/s
+        189                  gst_requested_throughput                          Requested Global Store Throughput  23.792MB/s  62.394GB/s  24.602GB/s
+        189                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+        189                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+        189                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      97.57%
+        189                            gld_throughput                                     Global Load Throughput  63.446MB/s  124.79GB/s  49.207GB/s
+        189                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      97.57%
+        189                            gst_throughput                                    Global Store Throughput  31.723MB/s  62.394GB/s  24.603GB/s
+        189                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+        189                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+        189                      global_load_requests   Total number of global load requests from Multiprocessor           4      170528        4531
+        189                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+        189                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+        189                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+        189                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+        189                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           4      170528        4531
+        189                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        2265
+        189                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+        189                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+        189                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.39%
+        189                    tex_cache_transactions                                 Unified Cache Transactions           4      170528        4531
+        189                    dram_read_transactions                            Device Memory Read Transactions          11      172955        4768
+        189                   dram_write_transactions                           Device Memory Write Transactions           4       79832        1339
+    Kernel: void kernelPointwiseApply3<TensorMulOp<float>, float, float, float, unsigned int, int=1, int=-1, int=2>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=-1>, float, float)
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)      456250      456250      456250
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)     1368750     1368750     1368750
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions    57995588    57995588    57995588
+          3                  gld_requested_throughput                           Requested Global Load Throughput  82.612GB/s  83.322GB/s  82.983GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  79.091GB/s  79.770GB/s  79.446GB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                            gld_efficiency                              Global Memory Load Efficiency      70.87%      70.87%      70.87%
+          3                            gld_throughput                                     Global Load Throughput  116.57GB/s  117.57GB/s  117.09GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+          3                            gst_throughput                                    Global Store Throughput  79.092GB/s  79.771GB/s  79.447GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor      114064      114064      114064
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      57.41%      57.41%      57.41%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)       84056       84056       84056
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)       57032       57032       57032
+          3                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          3                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      54.00%      54.00%      54.00%
+          3                    tex_cache_transactions                                 Unified Cache Transactions      114064      114064      114064
+          3                    dram_read_transactions                            Device Memory Read Transactions        3184        4572        3889
+          3                   dram_write_transactions                           Device Memory Write Transactions       51124       51451       51338
+    Kernel: void kernelReduceContigDim<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, float, float, thrust::identity<float>, float)
+          2                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          2                             flop_count_sp                Floating Point Operations(Single Precision)     1022000     1022000     1022000
+          2                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          2                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          2                                inst_fp_32                                    FP Instructions(Single)     1022000     1022000     1022000
+          2                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          2                              inst_integer                                       Integer Instructions    14691250    14691250    14691250
+          2                  gld_requested_throughput                           Requested Global Load Throughput  50.620GB/s  51.030GB/s  50.824GB/s
+          2                  gst_requested_throughput                          Requested Global Store Throughput  2.0248GB/s  2.0412GB/s  2.0330GB/s
+          2                    shared_load_throughput                              Shared Memory Load Throughput  1036.7GB/s  1045.1GB/s  1040.9GB/s
+          2                   shared_store_throughput                             Shared Memory Store Throughput  64.793GB/s  65.319GB/s  65.055GB/s
+          2                            gld_efficiency                              Global Memory Load Efficiency      78.12%      78.12%      78.12%
+          2                            gld_throughput                                     Global Load Throughput  64.793GB/s  65.319GB/s  65.055GB/s
+          2                            gst_efficiency                             Global Memory Store Efficiency      12.50%      12.50%      12.50%
+          2                            gst_throughput                                    Global Store Throughput  16.198GB/s  16.330GB/s  16.264GB/s
+          2                         shared_efficiency                                   Shared Memory Efficiency      11.58%      11.58%      11.58%
+          2                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          2                      global_load_requests   Total number of global load requests from Multiprocessor       73000       73000       73000
+          2                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          2                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          2                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          2                           l2_tex_hit_rate                                          L2 Cache Hit Rate      36.87%      36.87%      36.87%
+          2                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)       73000       73000       73000
+          2                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)       18250       18250       18250
+          2                  shared_load_transactions                                   Shared Load Transactions      292000      292000      292000
+          2                 shared_store_transactions                                  Shared Store Transactions       18250       18250       18250
+          2                        tex_cache_hit_rate                                     Unified Cache Hit Rate      45.21%      45.21%      45.21%
+          2                    tex_cache_transactions                                 Unified Cache Transactions       73000       73000       73000
+          2                    dram_read_transactions                            Device Memory Read Transactions       59305       61735       60520
+          2                   dram_write_transactions                           Device Memory Write Transactions       25784       25909       25846
+    Kernel: void scal_kernel<float, float, int=1, bool=1, int=6, int=5, int=5, int=3>(cublasTransposeParams<float>, float const *, float*, float const *)
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)           0           0           0
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)           0           0           0
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions       79872       79872       79872
+          3                  gld_requested_throughput                           Requested Global Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  1.4609GB/s  1.4827GB/s  1.4699GB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                            gld_efficiency                              Global Memory Load Efficiency       0.00%       0.00%       0.00%
+          3                            gld_throughput                                     Global Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                            gst_efficiency                             Global Memory Store Efficiency      41.67%      41.67%      41.67%
+          3                            gst_throughput                                    Global Store Throughput  3.5062GB/s  3.5585GB/s  3.5278GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor           0           0           0
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      84.38%      85.94%      85.24%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           0           0           0
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         192         192         192
+          3                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          3                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      25.00%      25.00%      25.00%
+          3                    tex_cache_transactions                                 Unified Cache Transactions           0           0           0
+          3                    dram_read_transactions                            Device Memory Read Transactions         130         146         138
+          3                   dram_write_transactions                           Device Memory Write Transactions          98         100          99
+    Kernel: void kernelPointwiseApply1<TensorFillOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorFillOp<float>, float, unsigned int>, float, float)
+          1                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          1                             flop_count_sp                Floating Point Operations(Single Precision)           0           0           0
+          1                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          1                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          1                                inst_fp_32                                    FP Instructions(Single)           0           0           0
+          1                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          1                              inst_integer                                       Integer Instructions        2058        2058        2058
+          1                  gld_requested_throughput                           Requested Global Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                  gst_requested_throughput                          Requested Global Store Throughput  2.5499MB/s  2.5499MB/s  2.5493MB/s
+          1                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                            gld_efficiency                              Global Memory Load Efficiency       0.00%       0.00%       0.00%
+          1                            gld_throughput                                     Global Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                            gst_efficiency                             Global Memory Store Efficiency      12.50%      12.50%      12.50%
+          1                            gst_throughput                                    Global Store Throughput  20.399MB/s  20.399MB/s  20.399MB/s
+          1                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          1                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          1                      global_load_requests   Total number of global load requests from Multiprocessor           0           0           0
+          1                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          1                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          1                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          1                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+          1                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           0           0           0
+          1                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           1           1           1
+          1                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          1                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          1                        tex_cache_hit_rate                                     Unified Cache Hit Rate       0.00%       0.00%       0.00%
+          1                    tex_cache_transactions                                 Unified Cache Transactions           0           0           0
+          1                    dram_read_transactions                            Device Memory Read Transactions         165         165         165
+          1                   dram_write_transactions                           Device Memory Write Transactions          13          13          13
+    Kernel: void kernelPointwiseApply2<TensorAddOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorAddOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)          12      682112       33920
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)          12      682112       33920
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2240    13643776      679426
+         28                  gld_requested_throughput                           Requested Global Load Throughput  50.193MB/s  125.18GB/s  68.901GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  25.097MB/s  62.591GB/s  34.451GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         28                            gld_throughput                                     Global Load Throughput  66.925MB/s  125.18GB/s  68.904GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         28                            gst_throughput                                    Global Store Throughput  33.462MB/s  62.591GB/s  34.452GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           4      170528        8480
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate      33.33%      33.33%      33.33%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           4      170528        8480
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           4      170528        8480
+         28                    dram_read_transactions                            Device Memory Read Transactions          43      172715        8737
+         28                   dram_write_transactions                           Device Memory Write Transactions          12       79785        3229
+    Kernel: void kernelPointwiseApply2<TensorCAddOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorCAddOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)          24     1364224       67840
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)          12      682112       33920
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2240    13643776      679426
+         28                  gld_requested_throughput                           Requested Global Load Throughput  52.496MB/s  124.11GB/s  68.494GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  26.248MB/s  62.053GB/s  34.247GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         28                            gld_throughput                                     Global Load Throughput  69.994MB/s  124.11GB/s  68.496GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         28                            gst_throughput                                    Global Store Throughput  34.997MB/s  62.053GB/s  34.248GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           4      170528        8480
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate      33.33%      33.33%      33.33%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           4      170528        8480
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           4      170528        8480
+         28                    dram_read_transactions                            Device Memory Read Transactions          67      175103        8793
+         28                   dram_write_transactions                           Device Memory Write Transactions          10       80290        3315
+    Kernel: void kernelPointwiseApply3<sigmoid_updateGradInput_functor<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<sigmoid_updateGradInput_functor<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         10                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         10                             flop_count_sp                Floating Point Operations(Single Precision)         900         900         900
+         10                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         10                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         10                                inst_fp_32                                    FP Instructions(Single)         900         900         900
+         10                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         10                              inst_integer                                       Integer Instructions        8648        8648        8648
+         10                  gld_requested_throughput                           Requested Global Load Throughput  1.1642GB/s  1.2700GB/s  1.2189GB/s
+         10                  gst_requested_throughput                          Requested Global Store Throughput  596.05MB/s  650.23MB/s  624.06MB/s
+         10                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                            gld_efficiency                              Global Memory Load Efficiency      98.68%      98.68%      98.68%
+         10                            gld_throughput                                     Global Load Throughput  1.1797GB/s  1.2869GB/s  1.2351GB/s
+         10                            gst_efficiency                             Global Memory Store Efficiency      98.68%      98.68%      98.68%
+         10                            gst_throughput                                    Global Store Throughput  603.99MB/s  658.90MB/s  632.38MB/s
+         10                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         10                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         10                      global_load_requests   Total number of global load requests from Multiprocessor          76          76          76
+         10                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         10                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         10                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         10                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+         10                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)          76          76          76
+         10                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)          38          38          38
+         10                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         10                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         10                        tex_cache_hit_rate                                     Unified Cache Hit Rate      49.33%      49.33%      49.33%
+         10                    tex_cache_transactions                                 Unified Cache Transactions          76          76          76
+         10                    dram_read_transactions                            Device Memory Read Transactions          83         311         235
+         10                   dram_write_transactions                           Device Memory Write Transactions          10          25          15
+    Kernel: void kernelReduceNoncontigDim_shared<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, float, float, thrust::identity<float>, float, float volatile *, int*)
+         89                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         89                             flop_count_sp                Floating Point Operations(Single Precision)         780     1702144      119528
+         89                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         89                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         89                                inst_fp_32                                    FP Instructions(Single)         780     1702144      119528
+         89                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         89                              inst_integer                                       Integer Instructions       28968    18539928     1385140
+         89                  gld_requested_throughput                           Requested Global Load Throughput  366.80MB/s  152.08GB/s  74.764GB/s
+         89                  gst_requested_throughput                          Requested Global Store Throughput  14.672MB/s  645.25MB/s  389.86MB/s
+         89                    shared_load_throughput                              Shared Memory Load Throughput  1.1845GB/s  29.228GB/s  16.536GB/s
+         89                   shared_store_throughput                             Shared Memory Store Throughput  1.1845GB/s  20.140GB/s  12.186GB/s
+         89                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      94.38%
+         89                            gld_throughput                                     Global Load Throughput  489.06MB/s  152.08GB/s  74.779GB/s
+         89                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      94.38%
+         89                            gst_throughput                                    Global Store Throughput  19.563MB/s  645.25MB/s  390.48MB/s
+         89                         shared_efficiency                                   Shared Memory Efficiency      79.79%     100.00%      97.73%
+         89                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         89                      global_load_requests   Total number of global load requests from Multiprocessor          50      200800       13907
+         89                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         89                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         89                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         89                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%      23.08%       5.22%
+         89                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)          50      200800       13907
+         89                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2         832          70
+         89                  shared_load_transactions                                   Shared Load Transactions          31        9648         768
+         89                 shared_store_transactions                                  Shared Store Transactions          31        6648         566
+         89                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.02%      46.26%
+         89                    tex_cache_transactions                                 Unified Cache Transactions          50      201000       13921
+         89                    dram_read_transactions                            Device Memory Read Transactions         128      202621       14313
+         89                   dram_write_transactions                           Device Memory Write Transactions          16       27039        2726
+    Kernel: void kernelPointwiseApply1<TensorMulConstantOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorMulConstantOp<float>, float, unsigned int>, float, float)
+         56                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         56                             flop_count_sp                Floating Point Operations(Single Precision)          12      682112       33920
+         56                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         56                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         56                                inst_fp_32                                    FP Instructions(Single)          12      682112       33920
+         56                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         56                              inst_integer                                       Integer Instructions        2168     9551104      475905
+         56                  gld_requested_throughput                           Requested Global Load Throughput  23.572MB/s  91.971GB/s  42.936GB/s
+         56                  gst_requested_throughput                          Requested Global Store Throughput  23.572MB/s  91.971GB/s  42.936GB/s
+         56                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         56                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         56                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         56                            gld_throughput                                     Global Load Throughput  31.429MB/s  91.971GB/s  42.937GB/s
+         56                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         56                            gst_throughput                                    Global Store Throughput  31.429MB/s  91.971GB/s  42.937GB/s
+         56                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         56                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         56                      global_load_requests   Total number of global load requests from Multiprocessor           2       85264        4240
+         56                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         56                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         56                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         56                           l2_tex_hit_rate                                          L2 Cache Hit Rate      50.00%      50.00%      50.00%
+         56                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           2       85264        4240
+         56                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         56                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         56                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         56                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         56                    tex_cache_transactions                                 Unified Cache Transactions           2       85264        4240
+         56                    dram_read_transactions                            Device Memory Read Transactions          46       87852        4518
+         56                   dram_write_transactions                           Device Memory Write Transactions           8       79237        3095
+    Kernel: maxwell_sgemm_64x64_nt
+          7                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          7                             flop_count_sp                Floating Point Operations(Single Precision)     1064960     1064960     1064960
+          7                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          7                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          7                                inst_fp_32                                    FP Instructions(Single)      540928      540928      540928
+          7                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          7                              inst_integer                                       Integer Instructions      107904      107904      107904
+          7                  gld_requested_throughput                           Requested Global Load Throughput  3.3668GB/s  4.8953GB/s  4.5584GB/s
+          7                  gst_requested_throughput                          Requested Global Store Throughput  3.1303GB/s  4.5514GB/s  4.2381GB/s
+          7                    shared_load_throughput                              Shared Memory Load Throughput  30.188GB/s  43.893GB/s  40.872GB/s
+          7                   shared_store_throughput                             Shared Memory Store Throughput  16.552GB/s  24.066GB/s  22.410GB/s
+          7                            gld_efficiency                              Global Memory Load Efficiency      90.51%      90.51%      90.51%
+          7                            gld_throughput                                     Global Load Throughput  3.7199GB/s  5.4087GB/s  5.0364GB/s
+          7                            gst_efficiency                             Global Memory Store Efficiency      77.66%      77.66%      77.66%
+          7                            gst_throughput                                    Global Store Throughput  4.0308GB/s  5.8607GB/s  5.4573GB/s
+          7                         shared_efficiency                                   Shared Memory Efficiency      53.39%      53.39%      53.39%
+          7                           global_hit_rate                          Global Hit Rate in unified l1/tex       3.17%       3.17%       3.17%
+          7                      global_load_requests   Total number of global load requests from Multiprocessor        1300        1300        1300
+          7                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          7                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          7                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          7                           l2_tex_hit_rate                                          L2 Cache Hit Rate      53.48%      56.57%      55.36%
+          7                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)        1344        1344        1344
+          7                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)        1504        1504        1504
+          7                  shared_load_transactions                                   Shared Load Transactions        2816        2816        2816
+          7                 shared_store_transactions                                  Shared Store Transactions        1544        1544        1544
+          7                        tex_cache_hit_rate                                     Unified Cache Hit Rate      49.00%      49.02%      49.01%
+          7                    tex_cache_transactions                                 Unified Cache Transactions        1300        1300        1300
+          7                    dram_read_transactions                            Device Memory Read Transactions        1065        2377        1552
+          7                   dram_write_transactions                           Device Memory Write Transactions        1152        1440        1210
+    Kernel: void kernelPointwiseApply1<TensorAddConstantOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorAddConstantOp<float>, float, unsigned int>, float, float)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)          12      682112       33920
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)          12      682112       33920
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2168     9551104      475905
+         28                  gld_requested_throughput                           Requested Global Load Throughput  26.369MB/s  91.202GB/s  43.128GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  26.369MB/s  91.202GB/s  43.128GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         28                            gld_throughput                                     Global Load Throughput  35.158MB/s  91.202GB/s  43.129GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         28                            gst_throughput                                    Global Store Throughput  35.158MB/s  91.202GB/s  43.129GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           2       85264        4240
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate      50.00%      50.00%      50.00%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           2       85264        4240
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           2       85264        4240
+         28                    dram_read_transactions                            Device Memory Read Transactions          36       87136        4507
+         28                   dram_write_transactions                           Device Memory Write Transactions          12       79416        3268
+    Kernel: sgemm_32x32x32_TN
+         19                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         19                             flop_count_sp                Floating Point Operations(Single Precision)      999936  8592382464  1359524412
+         19                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         19                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         19                                inst_fp_32                                    FP Instructions(Single)      594432  4301449728   680716375
+         19                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         19                              inst_integer                                       Integer Instructions      218112   278230016    44261227
+         19                  gld_requested_throughput                           Requested Global Load Throughput  19.479GB/s  638.78GB/s  629.93GB/s
+         19                  gst_requested_throughput                          Requested Global Store Throughput  1.6284GB/s  20.191GB/s  1.8143GB/s
+         19                    shared_load_throughput                              Shared Memory Load Throughput  213.11GB/s  1303.5GB/s  1288.7GB/s
+         19                   shared_store_throughput                             Shared Memory Store Throughput  139.85GB/s  655.85GB/s  648.97GB/s
+         19                            gld_efficiency                              Global Memory Load Efficiency      22.72%      23.53%      23.37%
+         19                            gld_throughput                                     Global Load Throughput  83.454GB/s  2715.0GB/s  2677.5GB/s
+         19                            gst_efficiency                             Global Memory Store Efficiency      77.66%     100.00%      83.98%
+         19                            gst_throughput                                    Global Store Throughput  1.6284GB/s  24.340GB/s  1.8617GB/s
+         19                         shared_efficiency                                   Shared Memory Efficiency      66.88%      76.47%      74.01%
+         19                           global_hit_rate                          Global Hit Rate in unified l1/tex      71.98%      75.22%      73.99%
+         19                      global_load_requests   Total number of global load requests from Multiprocessor        2288    33362500     5276683
+         19                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         19                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         19                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         19                           l2_tex_hit_rate                                          L2 Cache Hit Rate      65.73%      85.73%      71.44%
+         19                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)        2368    35329185     5571072
+         19                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)        1504       85264       15588
+         19                  shared_load_transactions                                   Shared Load Transactions        6144    17015296     2697653
+         19                 shared_store_transactions                                  Shared Store Transactions        4032     8561088     1358523
+         19                        tex_cache_hit_rate                                     Unified Cache Hit Rate      68.46%      76.74%      70.87%
+         19                    tex_cache_transactions                                 Unified Cache Transactions        2288    33362500     5276683
+         19                    dram_read_transactions                            Device Memory Read Transactions         891     5979825      939443
+         19                   dram_write_transactions                           Device Memory Write Transactions        1095      108509       18975
+    Kernel: void GRU_elementWise_bp1<float, float, float>(int, int, float*, float*, float*, float*, float*, float*, float*, int, int)
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)      531903      532772      532428
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)      474821      480904      478498
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions     1646925     1647794     1647450
+          3                  gld_requested_throughput                           Requested Global Load Throughput  72.173GB/s  76.072GB/s  73.495GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  72.173GB/s  76.072GB/s  73.495GB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                            gld_efficiency                              Global Memory Load Efficiency      84.88%      84.88%      84.88%
+          3                            gld_throughput                                     Global Load Throughput  85.032GB/s  89.626GB/s  86.590GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency      70.39%      70.59%      70.50%
+          3                            gst_throughput                                    Global Store Throughput  102.34GB/s  108.07GB/s  104.25GB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor       15974       15974       15974
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      50.32%      50.38%      50.36%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)       18814       18814       18814
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)       22622       22685       22650
+          3                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          3                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      44.46%      44.55%      44.51%
+          3                    tex_cache_transactions                                 Unified Cache Transactions       15974       15974       15974
+          3                    dram_read_transactions                            Device Memory Read Transactions       16532       16777       16624
+          3                   dram_write_transactions                           Device Memory Write Transactions       15194       15438       15288
+    Kernel: void kernelPointwiseApply3<TensorMulOp<float>, float, float, float, unsigned int, int=1, int=2, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=2>, float, float)
+         10                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         10                             flop_count_sp                Floating Point Operations(Single Precision)         300         300         300
+         10                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         10                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         10                                inst_fp_32                                    FP Instructions(Single)         300         300         300
+         10                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         10                              inst_integer                                       Integer Instructions       12548       12548       12548
+         10                  gld_requested_throughput                           Requested Global Load Throughput  807.55MB/s  882.25MB/s  856.36MB/s
+         10                  gst_requested_throughput                          Requested Global Store Throughput  576.82MB/s  630.18MB/s  611.69MB/s
+         10                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         10                            gld_efficiency                              Global Memory Load Efficiency      90.52%      90.52%      90.52%
+         10                            gld_throughput                                     Global Load Throughput  892.15MB/s  974.68MB/s  946.08MB/s
+         10                            gst_efficiency                             Global Memory Store Efficiency      98.68%      98.68%      98.68%
+         10                            gst_throughput                                    Global Store Throughput  584.51MB/s  638.58MB/s  619.84MB/s
+         10                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         10                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         10                      global_load_requests   Total number of global load requests from Multiprocessor          76          76          76
+         10                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         10                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         10                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         10                           l2_tex_hit_rate                                          L2 Cache Hit Rate      18.75%      18.75%      18.75%
+         10                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)          58          58          58
+         10                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)          38          38          38
+         10                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         10                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         10                        tex_cache_hit_rate                                     Unified Cache Hit Rate      54.93%      54.93%      54.93%
+         10                    tex_cache_transactions                                 Unified Cache Transactions          76          76          76
+         10                    dram_read_transactions                            Device Memory Read Transactions          46         472         204
+         10                   dram_write_transactions                           Device Memory Write Transactions          16          28          19
+    Kernel: sgemm_32x32x32_NN
+         26                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         26                             flop_count_sp                Floating Point Operations(Single Precision)      839808  8594446336   993847886
+         26                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         26                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         26                                inst_fp_32                                    FP Instructions(Single)      443520  4303394816   497682077
+         26                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         26                              inst_integer                                       Integer Instructions       71424   280383488    32508140
+         26                  gld_requested_throughput                           Requested Global Load Throughput  10.864GB/s  643.77GB/s  629.25GB/s
+         26                  gst_requested_throughput                          Requested Global Store Throughput  1.0466GB/s  10.570GB/s  1.9685GB/s
+         26                    shared_load_throughput                              Shared Memory Load Throughput  49.328GB/s  1316.7GB/s  1288.8GB/s
+         26                   shared_store_throughput                             Shared Memory Store Throughput  29.068GB/s  663.17GB/s  649.43GB/s
+         26                            gld_efficiency                              Global Memory Load Efficiency      21.86%      23.53%      23.09%
+         26                            gld_throughput                                     Global Load Throughput  46.979GB/s  2736.2GB/s  2674.7GB/s
+         26                            gst_efficiency                             Global Memory Store Efficiency      77.70%     100.00%      82.63%
+         26                            gst_throughput                                    Global Store Throughput  1.3396GB/s  13.604GB/s  1.9906GB/s
+         26                         shared_efficiency                                   Shared Memory Efficiency      66.92%      72.51%      71.67%
+         26                           global_hit_rate                          Global Hit Rate in unified l1/tex      73.59%      77.25%      74.41%
+         26                      global_load_requests   Total number of global load requests from Multiprocessor        2528    33377380     3858397
+         26                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         26                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         26                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         26                           l2_tex_hit_rate                                          L2 Cache Hit Rate      43.12%      82.42%      51.88%
+         26                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)        2704    32539069     3748565
+         26                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         292      100000       12199
+         26                  shared_load_transactions                                   Shared Load Transactions        2688    17059840     1974744
+         26                 shared_store_transactions                                  Shared Store Transactions        1584     8592640      995076
+         26                        tex_cache_hit_rate                                     Unified Cache Hit Rate      73.51%      78.30%      74.71%
+         26                    tex_cache_transactions                                 Unified Cache Transactions        2528    33377380     3858397
+         26                    dram_read_transactions                            Device Memory Read Transactions        1598     5919056      679716
+         26                   dram_write_transactions                           Device Memory Write Transactions         265      124033       15015
+    Kernel: void kernelReduceNoncontigDim<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, float, float, thrust::identity<float>, float)
+          3                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          3                             flop_count_sp                Floating Point Operations(Single Precision)    33306250    33306250    33306250
+          3                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          3                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          3                                inst_fp_32                                    FP Instructions(Single)    33306250    33306250    33306250
+          3                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          3                              inst_integer                                       Integer Instructions   137565230   137565230   137565230
+          3                  gld_requested_throughput                           Requested Global Load Throughput  186.41GB/s  188.21GB/s  187.37GB/s
+          3                  gst_requested_throughput                          Requested Global Store Throughput  30.541MB/s  30.836MB/s  30.698MB/s
+          3                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          3                            gld_efficiency                              Global Memory Load Efficiency      82.01%      82.01%      82.01%
+          3                            gld_throughput                                     Global Load Throughput  227.29GB/s  229.49GB/s  228.46GB/s
+          3                            gst_efficiency                             Global Memory Store Efficiency      99.87%      99.87%      99.87%
+          3                            gst_throughput                                    Global Store Throughput  30.581MB/s  30.876MB/s  30.738MB/s
+          3                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          3                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          3                      global_load_requests   Total number of global load requests from Multiprocessor     4168750     4168750     4168750
+          3                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          3                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          3                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          3                           l2_tex_hit_rate                                          L2 Cache Hit Rate      12.00%      12.72%      12.40%
+          3                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)     5076438     5076438     5076438
+          3                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)         667         667         667
+          3                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          3                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          3                        tex_cache_hit_rate                                     Unified Cache Hit Rate      48.68%      48.68%      48.68%
+          3                    tex_cache_transactions                                 Unified Cache Transactions     4168750     4168750     4168750
+          3                    dram_read_transactions                            Device Memory Read Transactions     4396137     4472325     4444371
+          3                   dram_write_transactions                           Device Memory Write Transactions       27000       27169       27084
+    Kernel: void elementWise_bp2<float, float, float, int=3, int=6, bool=0>(int, int, float*, float*)
+          6                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          6                             flop_count_sp                Floating Point Operations(Single Precision)       61758       61758       61758
+          6                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          6                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          6                                inst_fp_32                                    FP Instructions(Single)       64167       64167       64167
+          6                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          6                              inst_integer                                       Integer Instructions      371752      371752      371752
+          6                  gld_requested_throughput                           Requested Global Load Throughput  30.400GB/s  31.369GB/s  30.964GB/s
+          6                  gst_requested_throughput                          Requested Global Store Throughput  124.02MB/s  127.97MB/s  126.32MB/s
+          6                    shared_load_throughput                              Shared Memory Load Throughput  4.9376GB/s  5.0949GB/s  5.0291GB/s
+          6                   shared_store_throughput                             Shared Memory Store Throughput  5.0968GB/s  5.2592GB/s  5.1914GB/s
+          6                            gld_efficiency                              Global Memory Load Efficiency      77.10%      78.24%      77.67%
+          6                            gld_throughput                                     Global Load Throughput  39.322GB/s  40.291GB/s  39.868GB/s
+          6                            gst_efficiency                             Global Memory Store Efficiency      76.04%      80.51%      78.28%
+          6                            gst_throughput                                    Global Store Throughput  155.89MB/s  166.66MB/s  161.51MB/s
+          6                         shared_efficiency                                   Shared Memory Efficiency      76.04%      76.04%      76.04%
+          6                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          6                      global_load_requests   Total number of global load requests from Multiprocessor        7530        7530        7530
+          6                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          6                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          6                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          6                           l2_tex_hit_rate                                          L2 Cache Hit Rate      19.56%      20.76%      20.16%
+          6                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)        8782        8912        8847
+          6                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)          34          36          35
+          6                  shared_load_transactions                                   Shared Load Transactions         279         279         279
+          6                 shared_store_transactions                                  Shared Store Transactions         288         288         288
+          6                        tex_cache_hit_rate                                     Unified Cache Hit Rate      46.99%      48.00%      47.49%
+          6                    tex_cache_transactions                                 Unified Cache Transactions        7530        7530        7530
+          6                    dram_read_transactions                            Device Memory Read Transactions        7852        8116        8003
+          6                   dram_write_transactions                           Device Memory Write Transactions        1090        1379        1233
+    Kernel: void kernelPointwiseApply3<TensorAddCMulOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorAddCMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+         28                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+         28                             flop_count_sp                Floating Point Operations(Single Precision)          36     2046336      101760
+         28                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+         28                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+         28                                inst_fp_32                                    FP Instructions(Single)          24     1364224       67840
+         28                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+         28                              inst_integer                                       Integer Instructions        2312    17736448      882947
+         28                  gld_requested_throughput                           Requested Global Load Throughput  77.325MB/s  182.31GB/s  101.53GB/s
+         28                  gst_requested_throughput                          Requested Global Store Throughput  25.775MB/s  60.771GB/s  33.845GB/s
+         28                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+         28                            gld_efficiency                              Global Memory Load Efficiency      75.00%     100.00%      98.05%
+         28                            gld_throughput                                     Global Load Throughput  103.10MB/s  182.31GB/s  101.54GB/s
+         28                            gst_efficiency                             Global Memory Store Efficiency      75.00%     100.00%      98.05%
+         28                            gst_throughput                                    Global Store Throughput  34.367MB/s  60.771GB/s  33.846GB/s
+         28                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+         28                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+         28                      global_load_requests   Total number of global load requests from Multiprocessor           6      255792       12720
+         28                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+         28                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+         28                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+         28                           l2_tex_hit_rate                                          L2 Cache Hit Rate      50.00%      50.00%      50.00%
+         28                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)           6      255792       12720
+         28                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)           2       85264        4240
+         28                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+         28                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+         28                        tex_cache_hit_rate                                     Unified Cache Hit Rate      33.33%      50.00%      48.74%
+         28                    tex_cache_transactions                                 Unified Cache Transactions           6      255792       12720
+         28                    dram_read_transactions                            Device Memory Read Transactions          59      179499        8954
+         28                   dram_write_transactions                           Device Memory Write Transactions           8       79796        3341
+    Kernel: void thrust::cuda_cub::core::_kernel_agent<thrust::cuda_cub::__parallel_for::ParallelForAgent<thrust::cuda_cub::__transform::binary_transform_f<thrust::device_ptr<float>, thrust::device_ptr<float>, thrust::device_ptr<float>, thrust::cuda_cub::__transform::no_stencil_tag, mse_updateGradInput_functor<float, float>, thrust::cuda_cub::__transform::always_true_predicate>, long>, thrust::cuda_cub::__transform::binary_transform_f<thrust::device_ptr<float>, thrust::device_ptr<float>, thrust::device_ptr<float>, thrust::cuda_cub::__transform::no_stencil_tag, mse_updateGradInput_functor<float, float>, thrust::cuda_cub::__transform::always_true_predicate>, long>(thrust::device_ptr<float>, thrust::device_ptr<float>)
+          1                             flop_count_dp                Floating Point Operations(Double Precision)           0           0           0
+          1                             flop_count_sp                Floating Point Operations(Single Precision)         240         240         240
+          1                             flop_count_hp                  Floating Point Operations(Half Precision)           0           0           0
+          1                                inst_fp_64                                    FP Instructions(Double)           0           0           0
+          1                                inst_fp_32                                    FP Instructions(Single)         240         240         240
+          1                                inst_fp_16                                      HP Instructions(Half)           0           0           0
+          1                              inst_integer                                       Integer Instructions        5120        5120        5120
+          1                  gld_requested_throughput                           Requested Global Load Throughput  469.02MB/s  469.02MB/s  469.02MB/s
+          1                  gst_requested_throughput                          Requested Global Store Throughput  234.51MB/s  234.51MB/s  234.51MB/s
+          1                    shared_load_throughput                              Shared Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                   shared_store_throughput                             Shared Memory Store Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                            gld_efficiency                              Global Memory Load Efficiency     100.00%     100.00%     100.00%
+          1                            gld_throughput                                     Global Load Throughput  469.02MB/s  469.02MB/s  469.02MB/s
+          1                            gst_efficiency                             Global Memory Store Efficiency     100.00%     100.00%     100.00%
+          1                            gst_throughput                                    Global Store Throughput  234.51MB/s  234.51MB/s  234.51MB/s
+          1                         shared_efficiency                                   Shared Memory Efficiency       0.00%       0.00%       0.00%
+          1                           global_hit_rate                          Global Hit Rate in unified l1/tex       0.00%       0.00%       0.00%
+          1                      global_load_requests   Total number of global load requests from Multiprocessor          32          32          32
+          1                            local_hit_rate                                             Local Hit Rate       0.00%       0.00%       0.00%
+          1                       local_load_requests    Total number of local load requests from Multiprocessor           0           0           0
+          1                      local_store_requests   Total number of local store requests from Multiprocessor           0           0           0
+          1                           l2_tex_hit_rate                                          L2 Cache Hit Rate       0.00%       0.00%       0.00%
+          1                  l2_tex_read_transactions                            L2 Transactions (Texture Reads)          30          30          30
+          1                 l2_tex_write_transactions                           L2 Transactions (Texture Writes)          15          15          15
+          1                  shared_load_transactions                                   Shared Load Transactions           0           0           0
+          1                 shared_store_transactions                                  Shared Store Transactions           0           0           0
+          1                        tex_cache_hit_rate                                     Unified Cache Hit Rate      50.00%      50.00%      50.00%
+          1                    tex_cache_transactions                                 Unified Cache Transactions          32          32          32
+          1                    dram_read_transactions                            Device Memory Read Transactions         345         345         345
+          1                   dram_write_transactions                           Device Memory Write Transactions          24          24          24
+==11259== Generated result file: /home/adam/school/research/gnn/gnn-research/mpnn/profile/2019_03_08__16_26_34/train-metrics.11259.nvprof

@@ -1,0 +1,40 @@
+==5836== NVPROF is profiling process 5836, command: python -m graphsage.model --prof-forward
+==5836== Profiling application: python -m graphsage.model --prof-forward
+==5836== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   68.06%  169.76ms        51  3.3287ms     800ns  16.027ms  [CUDA memcpy HtoD]
+                   14.33%  35.747ms         9  3.9719ms  3.8845ms  4.0619ms  sgemm_128x128x8_NN
+                    6.94%  17.301ms     26196     660ns     608ns  43.233us  [CUDA memcpy DtoH]
+                    4.49%  11.211ms        20  560.54us  102.31us  1.0536ms  void kernelPointwiseApply3<TensorDivOp<float>, float, float, float, unsigned int, int=1, int=1, int=2>(OffsetInfo<TensorDivOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+                    2.21%  5.5165ms        20  275.82us  61.120us  513.38us  void kernelReduceContigDim<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, float, float, thrust::identity<float>, float)
+                    1.61%  4.0183ms         1  4.0183ms  4.0183ms  4.0183ms  sgemm_128x128x8_NN_vec
+                    1.07%  2.6813ms        10  268.13us  262.56us  272.16us  void indexSelectLargeIndex<float, unsigned int, int=2, int=2, int=-2, bool=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, TensorInfo<long, unsigned int>, int, int, unsigned int, unsigned int, long)
+                    0.53%  1.3303ms         9  147.81us  136.64us  167.55us  sgemm_32x32x32_NT
+                    0.44%  1.1026ms        10  110.26us  99.201us  123.87us  maxwell_sgemm_128x64_tn
+                    0.11%  278.18us        11  25.289us  10.593us  134.63us  sgemm_32x32x32_NT_vec
+                    0.07%  185.73us        10  18.572us  18.369us  18.784us  void cunn_ClassNLLCriterion_updateOutput_kernel<float, float>(float*, float*, float*, long*, float*, int, int, int, int, long)
+                    0.05%  121.38us        20  6.0680us  2.8480us  9.9840us  void kernelPointwiseApply2<TensorMaxValueOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMaxValueOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.04%  90.592us        10  9.0590us  8.9600us  9.2160us  void at::native::_GLOBAL__N__54_tmpxft_0006f258_00000000_12_SoftMax_compute_70_cpp1_ii_826a4626::cunn_SoftMaxForward<int=2, float, float, at::native::_GLOBAL__N__54_tmpxft_0006f258_00000000_12_SoftMax_compute_70_cpp1_ii_826a4626::LogSoftMaxForwardEpilogue>(float*, float, int)
+                    0.03%  63.300us        10  6.3300us  6.1770us  6.4640us  void gemmSN_NN_kernel<float, float, float, int=128, int=2, int=4, int=8, int=3, int=4>(cublasGemmSmallNParams<float, float, float>, float const *, float const *, float, float, int)
+                    0.01%  15.008us        10  1.5000us  1.2160us  3.8080us  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=2>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+      API calls:   85.75%  4.78281s       150  31.885ms  7.8180us  509.39ms  cudaLaunch
+                    6.99%  389.78ms     26246  14.850us  7.6060us  15.986ms  cudaMemcpyAsync
+                    3.25%  181.23ms         1  181.23ms  181.23ms  181.23ms  cudaFree
+                    1.69%  94.281ms    159278     591ns     531ns  258.86us  cudaGetDevice
+                    1.19%  66.165ms    105496     627ns     551ns  260.61us  cudaSetDevice
+                    1.07%  59.714ms     26246  2.2750us  1.4920us  1.3086ms  cudaStreamSynchronize
+                    0.05%  2.6473ms        14  189.10us  10.770us  316.05us  cudaMalloc
+                    0.00%  240.79us        91  2.6450us     279ns  100.10us  cuDeviceGetAttribute
+                    0.00%  221.41us         1  221.41us  221.41us  221.41us  cuDeviceTotalMem
+                    0.00%  137.19us      1280     107ns      74ns  1.6800us  cudaSetupArgument
+                    0.00%  56.796us       150     378ns     169ns  1.1930us  cudaConfigureCall
+                    0.00%  29.239us         1  29.239us  29.239us  29.239us  cuDeviceGetName
+                    0.00%  26.961us       120     224ns     110ns  1.3360us  cudaGetLastError
+                    0.00%  17.120us         1  17.120us  17.120us  17.120us  cudaMemcpy
+                    0.00%  16.708us        16  1.0440us     868ns  2.0620us  cudaEventCreateWithFlags
+                    0.00%  7.6750us        11     697ns     546ns  1.3900us  cudaDeviceGetAttribute
+                    0.00%     884ns         1     884ns     884ns     884ns  cuInit
+                    0.00%     340ns         1     340ns     340ns     340ns  cuDeviceGetCount
+                    0.00%     337ns         1     337ns     337ns     337ns  cuDeviceGet
+                    0.00%     330ns         1     330ns     330ns     330ns  cuDriverGetVersion
+==5836== Generated result file: /home/adam/school/research/gnn/gnn-research/graphsage/profile/2019_03_10__17_11_36/train-timeline.5836.nvprof

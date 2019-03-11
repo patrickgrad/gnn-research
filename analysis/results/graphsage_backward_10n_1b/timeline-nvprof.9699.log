@@ -1,0 +1,30 @@
+==9699== NVPROF is profiling process 9699, command: python -m graphsage.model --prof-backprop
+==9699== Profiling application: python -m graphsage.model --prof-backprop
+==9699== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   36.58%  1.4946ms        10  149.46us  141.67us  159.94us  maxwell_sgemm_128x64_nt
+                   23.01%  940.30us         9  104.48us  85.217us  119.49us  sgemm_32x32x32_NN
+                   12.98%  530.47us        10  53.047us  51.424us  54.369us  maxwell_sgemm_64x64_tt
+                    6.20%  253.19us        20  12.659us  6.3040us  18.880us  void kernelPointwiseApply3<ThresholdUpdateGradInput<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<ThresholdUpdateGradInput<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+                    5.95%  243.11us        11  22.100us  16.353us  76.768us  sgemm_32x32x32_NN_vec
+                    4.45%  181.83us        10  18.182us  17.921us  18.464us  void cunn_ClassNLLCriterion_updateGradInput_kernel<float>(float*, float*, long*, float*, float*, int, int, int, int, long)
+                    3.48%  142.02us        10  14.201us  14.016us  14.336us  sgemm_32x32x32_TN_vec
+                    3.01%  123.01us        10  12.301us  11.936us  12.448us  sgemm_32x32x32_TT
+                    1.56%  63.808us        10  6.3800us  6.2720us  6.5280us  void at::native::_GLOBAL__N__54_tmpxft_0006f258_00000000_12_SoftMax_compute_70_cpp1_ii_826a4626::cunn_SoftMaxBackward<int=2, float, float, at::native::_GLOBAL__N__54_tmpxft_0006f258_00000000_12_SoftMax_compute_70_cpp1_ii_826a4626::LogSoftMaxBackwardEpilogue>(float*, float, float, int)
+                    1.54%  63.043us        27  2.3340us  1.4400us  3.7440us  void kernelPointwiseApply2<TensorAddOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorAddOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.64%  26.176us        30     872ns     544ns  1.4400us  [CUDA memset]
+                    0.48%  19.680us        10  1.9680us  1.8880us  2.0800us  void kernelPointwiseApply1<TensorFillOp<float>, float, unsigned int, int=1>(OffsetInfo<TensorFillOp<float>, float, unsigned int>, float, float)
+                    0.12%  5.0560us         3  1.6850us  1.2160us  2.2720us  [CUDA memcpy DtoD]
+      API calls:   99.95%  4.88638s       137  35.667ms  7.1940us  566.44ms  cudaLaunch
+                    0.02%  1.0985ms      1729     635ns     531ns  12.175us  cudaGetDevice
+                    0.01%  561.30us       807     695ns     547ns  9.8550us  cudaSetDevice
+                    0.01%  253.61us        29  8.7450us  4.8840us  16.267us  cudaMemsetAsync
+                    0.00%  222.55us         1  222.55us  222.55us  222.55us  cudaMalloc
+                    0.00%  132.22us      1378      95ns      70ns     434ns  cudaSetupArgument
+                    0.00%  80.245us        20  4.0120us  1.9530us  16.801us  cudaEventQuery
+                    0.00%  42.745us         3  14.248us  11.998us  18.546us  cudaMemcpyAsync
+                    0.00%  42.296us        20  2.1140us  1.6050us  2.8370us  cudaEventRecord
+                    0.00%  37.209us       137     271ns     130ns  1.5090us  cudaConfigureCall
+                    0.00%  30.950us       150     206ns     102ns  1.0800us  cudaGetLastError
+                    0.00%     205ns         1     205ns     205ns     205ns  cudaGetDeviceCount
+==9699== Generated result file: /home/adam/school/research/gnn/gnn-research/graphsage/profile/2019_03_10__17_14_03/train-timeline.9699.nvprof

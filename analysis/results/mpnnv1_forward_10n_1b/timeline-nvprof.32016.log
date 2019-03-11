@@ -1,0 +1,43 @@
+==32016== NVPROF is profiling process 32016, command: python main.py --dataset qm9 --datasetPath ./data/qm9/dsgdb9nsd/ --epochs 1 --model MPNNv1 --log-interval 20 --profile-epoch-list 0 --profile-batch-list 100 --batch-size 10 --prefetch 10 --stop-after-profiling --prof-forward --logPath ./log/2019_03_08__16
+==32016== Profiling application: python main.py --dataset qm9 --datasetPath ./data/qm9/dsgdb9nsd/ --epochs 1 --model MPNNv1 --log-interval 20 --profile-epoch-list 0 --profile-batch-list 100 --batch-size 10 --prefetch 10 --stop-after-profiling --prof-forward --logPath ./log/2019_03_08__16
+==32016== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   42.50%  4.1970ms         6  699.49us  72.289us  1.3326ms  sgemm_128x128x8_NT_vec
+                   29.24%  2.8874ms         6  481.24us  13.632us  949.83us  maxwell_sgemm_128x64_tn
+                   16.27%  1.6063ms        95  16.908us     800ns  467.68us  void kernelPointwiseApply2<CopyOp<float, float>, float, float, unsigned int, int=1, int=2>(OffsetInfo<float, float, float>, OffsetInfo<CopyOp<float, float>, float, unsigned int>, float, float)
+                    3.89%  383.81us        63  6.0920us  2.5920us  64.960us  sgemm_32x32x32_NT_vec
+                    3.23%  319.39us        69  4.6280us     768ns  46.016us  void kernelPointwiseApply2<TensorMaxValueOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorMaxValueOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    1.77%  174.98us        19  9.2090us  2.7200us  35.521us  sgemm_32x32x32_NT
+                    0.86%  85.152us         7  12.164us  11.168us  17.280us  maxwell_sgemm_64x64_tn
+                    0.30%  29.440us         3  9.8130us  9.6320us  9.9200us  void kernelPointwiseApply3<TensorMulOp<float>, float, float, float, unsigned int, int=1, int=2, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=2>, float, float)
+                    0.26%  26.112us        23  1.1350us     928ns  2.7520us  void kernelPointwiseApply3<TensorMulOp<float>, float, float, float, unsigned int, int=1, int=1, int=1>(OffsetInfo<TensorMulOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, OffsetInfo<float, float, int=1>, float, float)
+                    0.25%  24.928us        13  1.9170us  1.6000us  2.9120us  void kernelReduceContigDim<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, float, float, thrust::identity<float>, float)
+                    0.21%  20.576us        10  2.0570us  1.8880us  2.8800us  void kernelReduceNoncontigDim_shared<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=1>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, float, float, thrust::identity<float>, float, float volatile *, int*)
+                    0.21%  20.256us        10  2.0250us  1.8880us  2.4000us  void CatArrayBatchedCopy<float, unsigned int, int=2>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                    0.17%  17.024us        13  1.3090us     928ns  3.0400us  void kernelPointwiseApply2<TensorGTValueOp<float, unsigned char>, unsigned char, float, unsigned int, int=1, int=2>(OffsetInfo<unsigned char, unsigned char, float>, OffsetInfo<TensorGTValueOp<float, unsigned char>, unsigned char, unsigned int>, unsigned char, float)
+                    0.16%  16.225us        13  1.2480us     896ns  3.0080us  void kernelPointwiseApply2<CopyOp<float, unsigned char>, float, unsigned char, unsigned int, int=1, int=1>(OffsetInfo<unsigned char, float, unsigned char>, OffsetInfo<CopyOp<float, unsigned char>, float, unsigned int>, float, float)
+                    0.14%  13.600us        14     971ns     768ns  1.5040us  [CUDA memcpy DtoD]
+                    0.13%  13.312us         3  4.4370us  4.3520us  4.5760us  void GRU_elementWise_fp<float, float, float>(int, int, int, int, float const *, float const *, float const *, float*, float const *, float*, float*, bool, bool, int)
+                    0.13%  12.928us         3  4.3090us  4.1280us  4.4160us  void kernelReduceNoncontigDim<float, unsigned int, float, thrust::identity<float>, ReduceAdd<float>, thrust::identity<float>, int=1, int=2>(TensorInfo<float, unsigned int>, TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, float, float, thrust::identity<float>, float)
+                    0.12%  12.096us        13     930ns     512ns  5.3760us  [CUDA memcpy HtoD]
+                    0.12%  11.488us        10  1.1480us  1.0880us  1.6000us  void kernelPointwiseApply2<TensorSigmoidOp<float>, float, float, unsigned int, int=1, int=1>(OffsetInfo<TensorSigmoidOp<float>, float, unsigned int>, OffsetInfo<float, float, int=1>, float, float)
+                    0.03%  3.0720us         1  3.0720us  3.0720us  3.0720us  void CatArrayBatchedCopy<float, unsigned int, int=3>(float*, CatArrInputTensor<float, unsigned int>*, OutputTensorSizeStride<unsigned int, unsigned int=4>, int, unsigned int)
+                    0.01%     512ns         1     512ns     512ns     512ns  [CUDA memset]
+      API calls:   50.00%  925.79ms       367  2.5226ms  5.0040us  922.63ms  cudaLaunch
+                   49.42%  915.11ms        34  26.915ms     632ns  915.08ms  cudaEventDestroy
+                    0.31%  5.7730ms         2  2.8865ms  10.854us  5.7622ms  cudaStreamSynchronize
+                    0.15%  2.7176ms      4166     652ns     533ns  13.911us  cudaGetDevice
+                    0.07%  1.2037ms      1772     679ns     547ns  3.8420us  cudaSetDevice
+                    0.02%  369.66us      2724     135ns      70ns  18.741us  cudaSetupArgument
+                    0.02%  307.55us        27  11.390us  6.9590us  30.795us  cudaMemcpyAsync
+                    0.00%  72.157us       367     196ns     107ns  3.8680us  cudaConfigureCall
+                    0.00%  62.412us       332     187ns      79ns  4.4920us  cudaGetLastError
+                    0.00%  55.965us        15  3.7310us  2.5500us  12.086us  cudaStreamDestroy
+                    0.00%  50.360us        35  1.4380us     818ns  3.3800us  cudaEventCreateWithFlags
+                    0.00%  33.923us        10  3.3920us  2.4810us  7.6260us  cudaEventQuery
+                    0.00%  31.688us        12  2.6400us  1.7950us  4.3850us  cudaStreamCreateWithPriority
+                    0.00%  29.751us        20  1.4870us  1.0140us  2.3350us  cudaEventRecord
+                    0.00%  19.890us         3  6.6300us  4.3340us  11.156us  cudaStreamCreate
+                    0.00%  16.411us        12  1.3670us     787ns  2.0250us  cudaStreamWaitEvent
+                    0.00%  9.9860us         1  9.9860us  9.9860us  9.9860us  cudaMemsetAsync
+==32016== Generated result file: /home/adam/school/research/gnn/gnn-research/mpnn/profile/2019_03_08__16_19_51/train-timeline.32016.nvprof

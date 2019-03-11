@@ -8,8 +8,8 @@ DATASET="qm9"
 DATASETPATH="./data/qm9/dsgdb9nsd/"
 MODEL=${MODEL:-"MPNNv2"} # MPNNv1 uses too much memory, and MPNNv3 crashed
 PHASE=${PHASE:-"forward"}
-EPOCHS="2" 
-PROFILE_EPOCHS="1"
+EPOCHS="1" 
+PROFILE_EPOCHS="0"
 PROFILE_BATCHES="100"
 BATCH_SIZE=10
 PF_THREADS=10
@@ -24,8 +24,11 @@ PROF_DIR="$PROF_ROOT/$DATE/"
 
 #METRICS="issued_ipc,issue_slot_utilization,achieved_occupancy,l2_utilization,stall_constant_memory_dependency,stall_exec_dependency,stall_inst_fetch,stall_memory_dependency,stall_memory_throttle,stall_not_selected,stall_other,stall_pipe_busy,stall_sync"
 #METRICS="issued_ipc,issue_slot_utilization,achieved_occupancy,eligible_warps_per_cycle,gld_efficiency,gst_efficiency,shared_efficiency,warp_execution_efficiency,gld_throughput,gst_throughput,dram_utilization,cf_fu_utilization,double_precision_fu_utilization,half_precision_fu_utilization,issue_slot_utilization,l2_utilization,ldst_fu_utilization,shared_utilization,single_precision_fu_utilization,special_fu_utilization,sysmem_read_utilization,sysmem_utilization,sysmem_write_utilization,tex_fu_utilization,tex_utilization,stall_constant_memory_dependency,stall_exec_dependency,stall_inst_fetch,stall_memory_dependency,stall_memory_throttle,stall_not_selected,stall_other,stall_pipe_busy,stall_sync"
-METRICS="flop_count_dp,flop_count_sp,flop_count_hp,inst_fp_64,inst_fp_32,inst_fp_16,inst_integer,gld_requested_throughput,gst_requested_throughput,shared_load_throughput,shared_store_throughput,gld_efficiency,gld_requested_throughput,gld_throughput,gst_efficiency,gst_requested_throughput,gst_throughput,shared_efficiency,global_hit_rate,global_load_requests,local_hit_rate,local_load_requests,local_store_requests,l2_tex_hit_rate,l2_tex_read_transactions,l2_tex_write_transactions,shared_load_transactions,shared_store_transactions,tex_cache_hit_rate,tex_cache_transactions"
+#METRICS="flop_count_dp,flop_count_sp,flop_count_hp,inst_fp_64,inst_fp_32,inst_fp_16,inst_integer,gld_requested_throughput,gst_requested_throughput,shared_load_throughput,shared_store_throughput,gld_efficiency,gld_requested_throughput,gld_throughput,gst_efficiency,gst_requested_throughput,gst_throughput,shared_efficiency,global_hit_rate,global_load_requests,local_hit_rate,local_load_requests,local_store_requests,l2_tex_hit_rate,l2_tex_read_transactions,l2_tex_write_transactions,shared_load_transactions,shared_store_transactions,tex_cache_hit_rate,tex_cache_transactions"
+#METRICS="dram_read_transactions,dram_write_transactions"
+METRICS="flop_count_dp,flop_count_sp,flop_count_hp,inst_fp_64,inst_fp_32,inst_fp_16,inst_integer,gld_requested_throughput,gst_requested_throughput,shared_load_throughput,shared_store_throughput,gld_efficiency,gld_requested_throughput,gld_throughput,gst_efficiency,gst_requested_throughput,gst_throughput,shared_efficiency,global_hit_rate,global_load_requests,local_hit_rate,local_load_requests,local_store_requests,l2_tex_hit_rate,l2_tex_read_transactions,l2_tex_write_transactions,shared_load_transactions,shared_store_transactions,tex_cache_hit_rate,tex_cache_transactions,dram_read_transactions,dram_write_transactions"
 
+# Need to add l2_read_transactions and l2_write_transactions
 NVPROF_METRICS_FLAGS="  --log-file $PROF_DIR/metrics-nvprof.%p.log --export-profile $PROF_DIR/train-metrics.%p.nvprof  --metrics $METRICS "
 NVPROF_TIMELINE_FLAGS=" --log-file $PROF_DIR/timeline-nvprof.%p.log  --export-profile $PROF_DIR/train-timeline.%p.nvprof"
 
@@ -101,6 +104,7 @@ fi
 
 # link latest dirs
 (
+  rm latest
   cd $PROF_ROOT
   ln -f -s $DATE -T latest
 )
